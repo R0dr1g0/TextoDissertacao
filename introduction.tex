@@ -1,0 +1,242 @@
+%=====================================================================
+\chapter{Introdução}
+\label{introduction}
+%=====================================================================
+
+A Computação Orientada a Serviços (SOC\footnote{Acrônimo do inglês para Service-Oriented Computing}) define um conjunto de conceitos, princípios, \textit{frameworks} e métodos para auxiliar organizações no desenvolvimento de aplicações distribuídas. O objetivo central da SOC é a construção de aplicações através da cooperação entre serviços preexistentes, onde os processos de negócios são montados com pouco esforço, em uma rede de serviços que podem ser acoplados de forma flexível, dinâmica, ágil e independente de plataformas específicas \cite{papazoglou_et_al:2006}.
+
+Serviços são aplicações autônomas, interoperáveis que podem ser descritas, publicadas, descobertas, orquestradas e implementadas utilizando protocolos padronizados, promovendo a colaboração entre aplicações distribuídas \cite{Dustdar:2008}. %São contratualmente definidos em uma descrição de serviços, que contém uma combinação sintática, semântica e informações comportamentais. %
+Desta maneira serviços definem as características e o comportamento de suas funcionalidades através de uma descrição de serviços. Uma descrição de serviço é um arquivo XML(colocar o que é XML), com a finalidade de descrever as operações que compõe o serviço. Esta descrição define detalhadamente qual o formato das entradas e saídas dos dados que serão processados por cada operação deste serviço. 
+
+%Colocar a citação da frase abaixo.
+O desenvolvimento de aplicações compostas por serviços, baseia-se na descrição e integração de serviços antes ou durante sua execução. De posse da descrição de serviços a aplicação busca provedores de serviços pela rede, e integra os serviços necessários, compondo a aplicação(Procurando referência). Esta abordagem de desenvolver aplicações consiste simplesmente em construir aplicações através da descoberta e invocação de serviços pela rede, ao invés de construir novas aplicações \cite{papazoglou_et_al:2006}.
+
+SOC utiliza Web Services (WS) como principal tecnologia para a integração entre sistemas (Procurando referência). Web Services descrevem funcionalidades que servem como base para construção e execução de processos de negócios que são previamente disponibilizados pela rede e acessíveis por interfaces e protocolos padrões. Web Services podem ser definidos como sistemas de software projetados para dar suporte a interação entre máquinas pela rede, através de interfaces descritas em um formato padrão como XML, processável especificamente em WSDL (\textit{Web Service Definition Language}) \cite{w3c_webService}. A interação entre maquinas é feita através da descrição dos serviços que compõem a aplicação, utilizando protocolos de troca de mensagens como: SOAP (\textit{Simple Object Access Protocol}), e são transportados por protocolos como HTTP (\textit{Hiper Text Transfer Protocol}).
+
+
+
+%O ambiente empresarial de hoje exige que organizações enfrentem adversidades como: mudança constante das TI’s, concorrência de mercado, leis que regulamentam as questões que envolve sua área de negócio e o cumprimento da demanda de produção de seus produtos. Com a construção de processos de negócios, organizações podem adaptar-se rapidamente às adversidades do mercado em que atuam, ao surgimento de novos modelos de negócios e seus requisitos, tornando-se totalmente automatizadas com complexas transações eletrônicas.
+
+%Comparar e retirar depois não faz parte do texto.
+%Metodologias de desenvolvimento de software baseadas em serviço, nos leva ao uso de modelos, melhores praticas e arquiteturas de referencias para a construção deste tipo de aplicações, focando principalmente os seus aspectos funcionais \cite{arsanjani, brown, papazoglou2006, towards}. 
+A construção de aplicações baseadas em Web Services é uma área que esta apenas no início de sua evolução, e tem como principal desafio manter o alinhamento entre os processos de negócio das organizações e Tecnologias de Informação (TI). A literatura aponta \cite{watson}, que metodologias e técnicas como: análise e design, o uso de modelos, melhores praticas e arquiteturas de referencias são necessárias, fundamentando que tais maneiras de modelar serviços são o caminho para o desenvolvimento de aplicações baseadas em serviços com qualidade\cite{Wesley}. 
+
+Neste contexto, alguns autores como \cite{arsanjani,brown,papazoglou2006,towards}, afirmam que técnicas como desenvolvimento orientado a modelos, orientação a serviço, técnicas para documentação e melhoria de processos de negócios, são a chave para garantir um desenvolvimento de software rápido e preciso de acordo com a necessidade das empresas em seu domínio de negócio \cite{Papazoglou_Traverso}.
+
+Trabalhos recentes produzidos por \cite{Zhang:2008}, dedicam-se à transformação de modelos. Este trabalho propõe uma abordagem baseada em MDA para modelar requisitos funcionais de processos de negócios, promovendo a flexibilidade da arquitetura de negócios a requisitos mutáveis. 
+
+O trabalho proposto por \cite{Placido}, propõe uma abordagem para modelar composições de serviços e suas restrições não-funcionais, partindo de abstrações de alto nível, e direcionando as  transformações de modelos para a linguagem de orquestração de serviços PEWS (\textit{Path Expression Web Services}). Este trabalho também define um meta-modelos  específicos para a linguagem de orquestração PEWS e um conjunto de regras de transformação dos elementos deste meta-modelo (as composições de serviços, e \textit{A-policies} associadas) para elementos específicos do modelo PEWS. Este trabalho considera os três níveis de abstração da Arquitetura Dirigida por Modelos (MDA \footnote{Acrônimo do inglês para Model Driven Architecture}) o CIM \footnote{Computation Independent Model}, PIM \footnote{Platform Independent Model} e PSM \footnote{Platform Specific Model}.
+
+%=====================================================================
+%\section{Motivação}
+%\label{motivation}
+%=====================================================================
+
+%Dentro da abordagem  da \ec, \citeonline[p.~45-46]{Norman:1986} afirma
+%que um  importante desafio ao  se desenvolver um sistema  interativo é
+%fazer com que seu  design seja conceitualmente consistente e coerente,
+%pois isso irá contribuir com  a interpretação do usuário acerca do que
+%o sistema faz e como se  pode/deve interagir com ele.  Na abordagem da
+%\se, \citeonline[p.~19]{deSouza:etal:1999}  destacam que um importante
+%desafio para o sucesso da comunicação  entre o designer e o usuário, é
+%fazer  com  que  o  modelo  conceitual da  aplicação  pretendido  pelo
+%designer  e  o modelo  da  aplicação  percebido  pelo usuário,  embora
+%diferentes, sejam consistentes entre si.
+%
+%Tudo  isso  demonstra que,  em  ambas  as  abordagens, é  relevante  a
+%preocupação em como  o usuário irá interpretar e  assimilar o processo
+%de interação com o sistema, ou seja,  o que ele pode fazer e como deve
+%agir para, usando  o sistema, alcançar seus objetivos.   O que revela,
+%de  fato, uma preocupação  comunicativa por  parte do  designer.  Para
+%\citeonline[p.~18]{deSouza:Leitao:2009},   durante   a  interação,   o
+%designer teria uma  conversa com o usuário e  uma versão computacional
+%dessa conversa é chamada de {\em discurso interativo} do {\em proposto
+%  do designer},  que é o  seu representante durante essa  conversa, em
+%outras palavras, a interface com usuário do sistema interativo.
+%
+%Sob   esta   perspectiva,   \citeonline[p.~17-18]{deSouza:Leitao:2009}
+%argumentam que  tudo que o sistema  irá comunicar ao  usuário deve ser
+%planejado em tempo de design e implementado na forma de um programa de
+%computador em estágios subsequentes de desenvolvimento.  Além disso, a
+%comunicação do designer com o  usuário, por meio do seu preposto, está
+%sujeita  às  restrições do  sistema  computacional  onde seu  discurso
+%interativo será codificado e tecnicamente o designer não conhece essas
+%restrições, isso é uma atribuição do desenvolvedor.  Portanto, durante
+%o processo  de construção do  {\em discurso interativo},  emerge outro
+%processo  comunicativo,  entre  o  designer  e  o  desenvolvedor  (uma
+%referência   coletiva  a   todo   o  time   de  desenvolvimento),   e,
+%consequentemente  uma  nova  preocupação   em  como  o  designer  irá,
+%primeiramente, se comunicar com quem irá codificar sua mensagem.
+%
+%É nesse contexto que se apresenta a linguagem \aladim~({\em \Aladim}),
+%que possibilita  ao designer conceber, representar e  avaliar o modelo
+%de interação. Sob  a perspectiva da \se, \aladim\  permite ao designer
+%especificar {\em  o que}  (o processo de  comunicação entre  usuário e
+%sistema) e {\em como} (quando  cada interlocutor irá atuar no processo
+%interativo) ele  quer que sejam comunicados ao  usuário. Para auxiliar
+%na avaliação, além da linguagem,  também será apresentado um método de
+%avaliação formativa  de usabilidade,  através da inspeção  dos modelos
+%criados,  usando um  conjunto  de diretrizes  definidas  com base  nas
+%heurísticas \citeonline{Nielsen:1994} e \citeonline{Shneiderman:1998}.
+%
+%Com  a   linguagem  de   modelagem  da  interação   aqui  apresentada,
+%pretende-se possibilitar ao designer  uma visualização que lhe permita
+%planejar  e  avaliar a  dinâmica  (comportamento)  do  sistema face  à
+%interação do  usuário.  Ela expressa a relação  comportamental entre o
+%usuário e  as funcionalidades oferecidas pelo sistema,  através de sua
+%interface.  Além disso, ela permite  a todos os envolvidos no design o
+%conhecimento  sobre  quais   funcionalidades  a  aplicação  oferece  e
+%instruções sobre os passos  necessários para o usuário usufruir dessas
+%funcionalidades,  ou seja,  como  interagir com  sua interface.   Esta
+%perspectiva   cria  novas  possibilidades   de  integração   entre  os
+%profissionais  de \es\  e  \ihc\, através  do  compartilhamento de  um
+%artefato, o  modelo de interação,  que descreve aspectos  da aplicação
+%que são comuns às duas áreas.
+%
+
+
+%=====================================================================
+\section{Objetivos}
+\label{goals}
+%=====================================================================
+
+Este trabalho tem como objetivo geral propor um método de desenvolvimento que expresse requisitos funcionais de aplicações baseadas em serviços para a linguagem WS-BPEL. Desta maneira este trabalho complementa o trabalho realizado por \cite{Placido}: (i) expandindo a modelagem de plataformas específicas da metodologia $\pi$-SOD-M para a linguagem WS-BPEL (\textit{Web Services - Business Process Execution Language})(ii) transformando modelos da plataforma WS-BPEL para código de máquina processável. Neste sentido, uma das contribuições desta pesquisa é a proposição de um meta-modelo para a plataforma WS-BPEL, capaz de captar aspectos funcionais, para que estes forneçam diretrizes para expressar processos de negócio. (iii) Possibilitar que projetos sejam bem documentados e gerenciados; 
+
+\subsection{Objetivos específicos}
+
+Os objetivos específicos deste trabalho são:
+
+\begin{enumerate}
+\item  Definir um meta-modelo da plataforma especifica WS-BPEL, este metamodelo será nomeado por WS-BPEL Model;
+
+\item  Especificar regras de transformação em ATL para transformar elementos do modelo $\pi$-\textit{Service Composition} para elementos do modelo WS-BPEL.
+
+\item  Definir regras de transformação do metamodelo WS-BPEL para gerar um esqueleto da especificação do processo de composição de serviços em WS-BPEL; 
+
+\item  Validar das transformações entre modelos através do estudo de caso.
+
+\item  Análise comparativa entre a especificação de uma aplicação construída pelo método $\pi$-SOD-M com modelos $\pi$-\textit{PEWS} e uma construída com modelos WS-BPEL, verificar a conformidade entre as duas instâncias.
+\end{enumerate}
+
+
+%
+%Com  base  nos fundamentos  motivacionais  apresentados, foi  possível
+%identificar  algumas necessidades com  as quais  o designer  se depara
+%durante a tarefa de  modelagem da interação.  Essas necessidades foram
+%enquadradas como requisitos para  a linguagem \aladim\ e são descritas
+%a seguir:
+%
+%\begin{itemize}
+%
+%  \item {\em Modelar a interação em vista ao processo comunicativo}: A
+%    linguagem deve  possuir elementos  que favoreçam a  comunicação do
+%    designer explicitando {\em o que} e {\em como} o usuário necessita
+%    fazer para  alcançar seus objetivos  usando o sistema.   Durante a
+%    construção da  mensagem que será comunicada ao  usuário através da
+%    interface,  o designer também  precisa comunicar  ao desenvolvedor
+%    qual é  essa mensagem e como  ela deve ser  comunicada ao usuário.
+%    Portanto,  quanto  melhor for  a  comunicação  do  designer com  o
+%    desenvolvedor da interface, melhor  será a comunicação do designer
+%    com o usuário da mesma.
+%
+%  \item  {\em  Estar consoante  com  algum  padrão de  desenvolvimento
+%    dirigido por  modelos}: Atualmente,  o avanço nas  metodologias de
+%    desenvolvimento  dirigido por  modelos, permitiu  o  surgimento de
+%    padrões para fortalecer a  abordagem. Modelar a interação pode ser
+%    vista como uma tarefa não tão abstrata quanto descrever cenários e
+%    nem tão concreta quanto construir protótipos.  Portanto, seguir um
+%    padrão trará um formalismo à especificação do modelo de interação.
+%    Esse  formalismo pode contribuir  para se  desenvolver ferramentas
+%    para  o processamento dessa  especificação, através  de atividades
+%    que vão desde a validação  até a geração automática de código, por
+%    meio  de  refinamento,  nos  diferentes  níveis  de  abstração  da
+%    abordagem.
+%
+%  \item {\em Possibilitar a  avaliação formativa da usabilidade}: Como
+%    apontando  por \citeonline{Folmer:2005}, problemas  de usabilidade
+%    identificados tardiamente, podem  demandar muitas modificações nos
+%    artefatos  já produzidos,  acarretando  um forte  impacto sobre  o
+%    software  desenvolvido  e elevando  consideravelmente  o custo  do
+%    produto.  Portanto,  a linguagem  deve  permitir  a realização  da
+%    inspeção  nos modelos criados,  possibilitando a  identificação de
+%    problemas de usabilidade ainda na fase de design.
+%
+%\end{itemize}
+%
+%Considerando  os  desafios  motivadores  citados  anteriormente,  este
+%trabalho tem como objetivo principal a proposição de uma linguagem que
+%auxilie o  designer na concepção, representação e  avaliação do modelo
+%de interação, face  à necessidade dele se comunicar  previamente com o
+%desenvolvedor,  sobre   sua  comunicação  com  usuário   por  meio  da
+%interface.
+%
+%Nossa  perspectiva  é  que  uma  linguagem que  atenda  os  requisitos
+%estabelecidos  pode  contribuir  para  o desenvolvimento  de  sistemas
+%interativos  com melhor  usabilidade, pois  compreender como  se  dá o
+%processo de  interação de uma  aplicação é fundamental para  o usuário
+%fazer o melhor uso dela.  Isso porque, \citeonline[p.~47]{Norman:1986}
+%argumenta que o  usuário deve conhecer o que o sistema  faz e como ele
+%funciona,    \citeonline[p.~87]{deSouza:2005}    também   destaca    a
+%importância de se avaliar como  serão as interpretações do designer ou
+%usuário em comparação aquilo  que está codificado na interface.  Dessa
+%forma, este trabalho apresenta os seguintes objetivos específicos:
+%
+%\begin{itemize}
+%
+%  \item Definir a linguagem, através da especificação da sua sintaxe e
+%    semântica usando a abordagem \mda~({\em \Mda}).
+%
+%  \item Construir uma ferramenta de  edição com suporte à validação da
+%    sintaxe da linguagem, usando \emf~({\em \Emf}).
+%
+%  \item  Definir um  método de  inspeção para  avaliação  formativa de
+%    usabilidade dos modelos descritos com a linguagem.
+%
+%\end{itemize}
+%
+%Adicionalmente,  para verificar se  estes objetivos  específicos foram
+%alcançados,  duas  avaliações foram  realizadas.  A  primeira foi  uma
+%análise  das  dimensões cognitivas  de  \aladim,  linguagem e  editor,
+%usando o \cdn~({\em \Cdn}). A  segunda foi um experimento de validação
+%do método de inspeção, usando a \ese~({\em \Ese}).
+%
+%=====================================================================
+\section{Organização do Documento}
+\label{organization}
+%=====================================================================
+%
+%Este  documento  está organizado  em  oito  capítulos.  Este  primeiro
+%capítulo  trouxe  uma  introdução  ao  trabalho  e  se  encerra  neste
+%parágrafo.   No capítulo~\ref{background},  é apresentada  uma revisão
+%dos principais  conceitos que fundamentam o  problema endereçado nesta
+%pesquisa.  O capítulo \ref{relatedWorks} apresenta trabalhos cujo foco
+%também  é  a  modelagem  da interação  usuário-sistema,  aplicação  de
+%padrões    e    avaliação    de    usabilidade.     Continuando,    no
+%capítulo~\ref{aladim},  é  apresentada  a  linguagem de  modelagem  da
+%interação,  \aladim,   através  da  descrição  de   seus  elementos  e
+%construção    de   modelos   de    interação   como    exemplos.    No
+%capítulo~\ref{editor},  é apresentação  uma ferramenta  de  edição dos
+%modelos    \aladim,    integrada     à    plataforma    Eclipse.     O
+%capítulo~\ref{aladimlEvaluation}  descreve   uma  discussão  analítica
+%sobre     as     dimensões      cognitivas     de     \aladim.      No
+%capítulo~\ref{usabilityEvaluation},   é   apresentado   o  método   de
+%avaliação  por  inspeção  em  modelos   \aladim\  e  o  relato  de  um
+%experimento de validação para  o referido método, cujos resultados são
+%confrontados contra problemas reais  já identificados durante o uso de
+%um   sistema    avaliado   em    um   teste   de    usabilidade.    No
+%capítulo~\ref{closures}, são  apresentadas as considerações  finais do
+%trabalho,  incluindo   suas  contribuições,  limitações   e  trabalhos
+%futuros.
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "main"
+%%% End: 
+
+Este trabalho está estruturado em cinco capítulos: no Capítulo 2, descrevemos a fundamentação teórica de nossa pesquisa, no Capítulo 3, contextualizamos alguns trabalhos relacionados ao desenvolvimento de nossa pesquisa; no Capítulo 4, descrevemos o nosso ambiente de estudo, a nossa implementação e a avaliação do mosso estudo de caso; e finalmente no Capítulo 5, descrevemos a avaliação sobre o nosso estudo de caso, as considerações finais deste trabalho e nossa perspectiva de trabalhos futuros.
+
+
+
+
+
+

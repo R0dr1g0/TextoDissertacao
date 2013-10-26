@@ -1,0 +1,17 @@
+<process name="NCName" targetNamespace="anyURI"
+	queryLanguage="anyURI"?
+	expressionLanguage="anyURI"?
+	suppressJoinFailure="yes|no"?
+	exitOnStandardFault="yes|no"?
+	xmlns="http://docs.oasis-open.org/wsbpel/2.0/process/executable"">
+	<partnerLinks>
+		...
+	</partnerLinks>
+	<variables>
+		...
+	</variables>
+	<sequence>
+		...
+	</sequence>
+	 activity
+</process>

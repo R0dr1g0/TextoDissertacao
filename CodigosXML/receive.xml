@@ -1,0 +1,15 @@
+<receive partnerLink="NCName"
+	portType="QName"?
+	operation="NCName"
+	variable="BPELVariableName"?
+	createInstance="yes|no"?
+	messageExchange="NCName"?
+	standard-attributes>
+	standard-elements
+	<correlations>?
+		<correlation set="NCName" initiate="yes|join|no"? />+
+	</correlations>
+	<fromParts>?
+		<fromPart part="NCName" toVariable="BPELVariableName" />+
+	</fromParts>
+</receive>

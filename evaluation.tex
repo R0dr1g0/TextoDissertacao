@@ -1,0 +1,540 @@
+%%%=====================================================================
+\chapter{Estendendo $\pi$-SOD-M para a plataforma WS-BPEL 2.0}
+%%\label{Complementando $\pi$-SOD-M}
+%%%=====================================================================
+%%
+Este capítulo descreve a extensão proposta para aumentar o número de  plataformas especificas do método $\pi$-SOD-M, abrangendo o desenvolvimento de sistemas orientados a serviços para a linguagem de orquestração WS-BPEL 2.0. A construção de aplicações com o método $\pi$-SOD-M inicia-se na modelagem de requisitos funcionais e não funcionais a partir de um modelo $\pi$-Use Case, em seguida estes casos de uso são transformados em uma serie de modelos PIM e PSM antes de finalmente gerar o código que implementa a aplicação.
+
+O ambiente $\pi$-SOD-M foi construído através da IDE Eclipse, mais especificamente utilizando \textit{Eclipse Modelling Framework} (EMF) para gerar o meta-modelo WS-BPEL 2.0, este \textit{framework} fornece utilitários necessários para definir, editar e manipular modelos. Para automatizar as transformações entre modelos utilizamos a linguagem ATL, ao qual é suportada pela IDE Eclipse em sua suíte de desenvolvimento. $\pi$-SOD-M Utiliza este ambiente para gerar composições de serviços em $\pi$-PEWS \cite{Placido}. Após nossa extensão do método $\pi$-SOD-M também construirá composições de serviços em WS-BPEL2.0.
+
+O restante deste capítulo está organizado da seguinte forma. Seção 4.1 descreve detalhadamente as entidades e suas funções da linguagem WS-BPEL 2.0. A seção 4.2 descreve como WS-BPEL 2.0 será incorporado ao metodologia $\pi$-SOD-M. Seção 4.3 descreve as alterações feitas para estender o ambiente $\pi$-SOD-M, para a adição de novos componentes para geração de especificação de sistemas em diferentes linguagens. Seção 4.4 descreve as transformações entre modelos citadas anteriormente. Seção 4.5 faz uma comparação entre códigos gerados pela metodologia $\pi$-SOD-M para as plataformas $\pi$-PEWS e WS-BPEL, e  por fim conclui capítulo.
+%%%=====================================================================
+\section{Meta-modelo WS-BPEL}%4.1
+%%\label{cdn}
+%%%=====================================================================
+
+
+Em construção!!!
+
+
+%%%%=====================================================================
+\subsection{Web Services-Business Process Executation Language}
+\label{WS-BPEL}
+%%%%=====================================================================
+\textit{Web Services-Business Process Execution Language} (WS-BPEL) é uma linguagem de composição com sintaxe baseada em XML, usada para descrever composição, orquestração, coordenação e processos de negócios composto por \textit{Web Services} (WS)\cite{BPEL20}. Assim como também, pode ser utilizada para criar serviços a partir da coordenação de outros serviços pré-existentes.
+
+Um processo BPEL, descreve como ocorre o relacionamento entre diversos \textit{web services} participantes de uma composição. Para descrever tais relacionamentos, BPEL oferece determinados tipos de construções similares as das linguagens de programação tradicionalmente conhecidas, como por exemplo: estrutura de repetição, condicionais, variáveis e atribuição, tratamento de exceções, parceiros de negócio e a coordenação destes parceiros. 
+
+Para que seja possível construir um processo de negócio BPEL é necessário uma série de elementos fundamentais para especificação de um processo de negócio. A estrutura básica de um processo BPEL é formada por três seções: \textit{PartnerLinks, Variables e Activities}. Desta maneira um esqueleto de um processo BPEL assemelha-se a um documento XML tradicional. A  listagem de código ilustra o esqueleto base de um processo descrito WS-BPEL.
+
+\lstinputlisting[language=XML,caption={Esqueleto de um processo BPEL.},label=Esqueleto de um processo BPEL]{CodigosXML/esqueletoprocessoBPEL.xml}
+
+A seguir descreveremos cada uma das seções demonstradas na listagem de código acima.
+
+<partnerLinks>: Esta seção define os elementos responsáveis por definir o conjunto de parceiros de negócios (\textit{PartnerLink}) utilizados em uma descrição de processo BPEL, identificando desta maneira qual funcionalidade deve ser oferecida por cada serviço parceiro \cite{BPEL20}.
+
+O elemento \textit{PartnerLink} ilustrado na \href{Esqueleto de um processo BPEL.}, estabelece um canal de comunicação direto entre os parceiros de serviço internos ou externos que atuam na execução de um processo BPEL. As ligações dos serviços parceiros (\textit{partner link}) devem estar associadas a um tipo de ligação entre parceiros (\textit{partner link type}) definidos na especificação do \textit{web services} no WSDL. Dependendo da necessidade da comunicação entre parceiros de serviços, o papel de um parceiro pode variar\cite{BPEL20}. 
+
+Um parceiro de serviço pode ser invocado por um serviço do processo e atuar com o papel de provedor de serviços (\textit{service provider}). Entretanto, se o mesmo serviço do processo invoca um serviço diferente, ele atuará como solicitante de um serviço (\textit{service requesters}). A definição do papel de um \textit{partnerLink} é definida através dos atributos \textit{myRole} e \textit{partnerRole}, que estabelecem o papel de provedor de serviço ou serviço associado respectivamente. A listagem de código a seguir demonstra a sintaxe de uma atividade \textit{partnerLink} \cite{BPEL20}.
+
+\lstinputlisting[language=XML,caption={Sintaxe da atividade patnerLink.}, label=PatnerLink]{CodigosXML/partnerLinks.xml}
+
+<variables>: Esta seção define as variáveis dos dados usadas pelo processo de negócio, para manter  as mensagens que constituem uma parte do estado de um processo negócio. As mensagens que tem seu estado capturados pelas variáveis são na grande maioria das vezes as mensagens trocadas entre  os parceiros de negócio (\textit{patnerlink}). As definições são feitas em termos de tipos de mensagem WSDL, elementos ou tipos simples de esquemas XML \cite{BPEL20}. Elas são usadas para manter os dados de estado e o histórico do processo com base nas mensagens trocadas. 
+
+As variáveis devem estar associadas a tipos de mensagens (\textit{menssages}) definidos na especificação WSDL. Variáveis podem conter dados que são necessários para a realização de estado relacionado com o processo e nunca trocada com parceiros. WS-BPEL usa três tipos de declarações de variáveis: tipo de mensagem WSDL, XML Schema tipo (simples ou complexa) e XML \textit{Schema} elemento. A listagem a segui demonstra a sintaxe da atividade <variables>.
+
+\lstinputlisting[language=XML,caption={Sintaxe da atividade variables.}, label=variables]{CodigosXML/variables.xml}
+
+<faultHandlers>: Esta seção é responsável por declarar todos os manipuladores de falhas do processo, os manipuladores de falha definem as atividades que devem ser executadas em resposta a falhas resultantes da invocação dos serviços de avaliação e aprovação. Em WS-BPEL, todas as falhas, seja ele interno ou resultantes de uma chamada de serviço, são identificados por um nome qualificado. Em particular, cada falha WSDL é identificada em WS-BPEL por um nome especifico formado pelo \textit{namespace} de destino do documento WSDL em que o tipo de porta relevante e o motivo da falha são definidos \cite{BPEL20}. A listagem a seguir demonstra a sintaxe de um <faultHandlers>.
+
+\lstinputlisting[language=XML,caption={Sintaxe da atividade faultHandlers.}, label=faultHandlers]{CodigosXML/faultHandlers.xml}
+
+
+\textit{activities}: Esta seção contém a descrição de todas as atividades que descrevem o comportamento geral do processo de negócio. O BPEL possui uma sintaxe com vários tipos de elementos, cuja conjunção consegue descrever todo o tipo de processo de negócio que um utilizador necessite. Assim como em qualquer outra linguagem de programação, a sintaxe da linguagem WS-BPEL, dispõe de primitivas básicas para declarar seus elementos em descrições de processos. Estas primitivas são chamadas de atividades\cite{BPEL20}. As atividades de um processo BPEL são dividas em duas categorias: as atividades básicas e atividades estruturadas. 
+
+%%%=====================================================================
+\subsubsection{Atividades Básicas}
+%%\label{designSpace}
+%%%=====================================================================
+
+Atividades básicas são atividades simples que não exige nenhuma lógica mais elaborada que são responsáveis por descreverem os passos elementares do comportamento de um processo \cite{BPEL20}. Estas atividades são vistas como um componente que interage com algo externo ao processo, como por exemplo a invocação de um serviço externo ao processo através de uma de suas construções. 
+
+Os comandos para definir uma atividade em uma descrição BPEL, são similares as \textit{tags} da linguagem XML, onde são denotados por um único caractere ASCII ou uma string de caracteres entre os sinais <(menor que) e (maior que)>, geralmente estes os comandos são denotados com palavras em inglês. Grande parte das \textit{tags} do BPEL, requerem seu fechamento. Então, tudo que estiver compreendido entre <comando> e </comando> será encarado como o corpo de um comando. A seguir descreveremos a semântica do conjunto de atividades básicas do padrão WS-BPEL 2.0. 
+
+<invoke>: esta atividade é usada para chamar uma operação em um dado \textit{Web Services} oferecidos por prestadores de serviços a uma composição de serviços. Esta atividade pode incluir outras atividades básicas aninhadas, como manipulador de compensação e manipuladores de falhas. A listagem de código a seguir demonstra a sintaxe da atividade <invoke> \cite{BPEL20}.
+
+\lstinputlisting[language=XML, caption={Sintaxe da atividade invoke.}, label=ConsWhile]{CodigosXML/invoke.xml}
+
+<receive>: O elemento \textit{receive} permite que um serviço do processo permaneça em estado de espera, agindo como um prestador de serviço, enquanto o processo recebe um pedido de um parceiro de serviço externo. Esta atividade específica um \textit{PartnerLink} que contenha um \textit{myRole} usado para receber mensagens, o \textit{portType} (opcional) é a operação que espera que o parceiro invoca que \cite{BPEL20}. Este elemento possui um conjunto de atributos que atribui valores a uma comunicação esperada, são eles: 
+
+\begin{itemize}
+
+\item[•] \textit{partnerLink}: define o \textit{PartnerLink} correspondente, ao parceiro de serviço que esta participando da troca de mensagens do processo.
+
+\item[•] \textit{portType}: define qual o parceiro de serviço que o processo espera receber uma mensagem de requisição.
+ 
+\item[•] \textit{operation}: define a operação de um serviço que vai receber uma mensagem de um outro processo.
+
+\item[•] \textit{variable}: define qual variável vai armazenar a mensagem de solicitação.
+
+\item[•] \textit{createInstance}: este atributo é definido com um valor booleano, caso seja definido como "SIM", uma nova instancia do processo de troca de mensagem sera criada, para que seja possível receber os dados da ou das mensagens trocadas entre os vários parceiros do processo, caso seja definido como não o processo não poderá receber mensagens pois não haverá uma instancia de uma atividade para receber os dados da ou das mensagens trocadas entre os parceiros \cite{BPEL20}. A listagem a seguir demonstra a sintaxe da atividade <receive>.
+
+\end{itemize}
+
+\lstinputlisting[language=XML, caption={Sintaxe da atividade receive.}, label=ConsWhile]{CodigosXML/receive.xml}
+
+Existem outras atividades básicas na linguagem WS-BPEL, estas são listadas a seguir:
+
+\begin{itemize}
+
+
+\item[•] <reply>: Esta atividade é usada para enviar uma resposta a um pedido previamente aceito através de uma mensagem da atividade <receive>. Uma atividade <reply> pode especificar um atributo variável que faz referência a variável que contém os dados da mensagem a ser enviada \cite{BPEL20} . A listagem a seguir demonstra a sintaxe da atividade <reply>.
+
+%\lstinputlisting[language=XML]{reply.xml}
+
+\item[•] <wait>: Esta atividade é especificada quando a necessidade de utilizar um temporizador para realiza uma pausa por um período de tempo ou data especificado é atingido. Se o período de tempo especificado for zero ou nulo então a atividade <Wait> é completada imediatamente \cite{BPEL20}.
+
+%\lstinputlisting[language=XML]{wait.xml}
+
+\item[•] <assign>: A atividade <assign> é utilizada para copiar dados de uma variável para outra, assim como também, para a construção de novas expressões e inserir dados utilizando expressões. O uso de expressões é motivado pela necessidade de realizar cálculos simples (como incrementar os números de sequência) \cite{BPEL20}. Expressões podem operar sobre variáveis, propriedades, constantes e literais para produzir um novo valor. A listagem a seguir demonstra a sintaxe da atividade <assign> .
+
+%\lstinputlisting[language=XML]{assign.xml}
+
+\item[•] <throw>: Esta atividade é utilizada quando um processo de negócio precisa sinalizar uma falha interna que ocorrera durante o seu fluxo de execução. A atividade <throw> fornece o nome para a falha, e pode, opcionalmente, fornecer dados com informações sobre a mesma. Um manipulador de falhas pode usar estes dados para lidar com a falha e para preencher quaisquer mensagens de falha que precisam ser enviados para outros serviços \cite{BPEL20}. A listagem a seguir demonstra a sintaxe da atividade <throw>.
+
+%\lstinputlisting[language=XML]{throw.xml}
+
+\item[•] <terminationHandler>:  A rescisão forçada de um escopo começa desativando manipuladores do escopo do evento e encerra a sua atividade principal e todas as instâncias de manipulador de funcionamento do evento. Depois disso, o <terminationHandler> personalizado para o âmbito de aplicação, se estiver presente, é executado. Caso contrário, o manipulador de encerramento padrão é executado \cite{BPEL20}. A listagem a seguir demonstra a sintaxe da atividade <terminationHandler>.
+
+%\lstinputlisting[language=XML]{terminationHandler.xml}
+
+\item[•] <compensate>: Esta atividade é usada para iniciar a compensação de falhas em todos os âmbitos internos que já tenham terminado a sua execução por completo com sucesso de modo padrão \cite{BPEL20}. A listagem a seguir demonstra a sintaxe da atividade <terminationHandler>.
+
+%\lstinputlisting[language=XML]{compensate.xml}
+
+\end{itemize}
+
+Para construir atividades mais complexas ou estruturadas no padrão WS-BPEL 2.0 é preciso combinar as primitivas básicas com atividades de controle. 
+
+%%%=====================================================================
+\subsubsection{Atividades Estruturadas}
+%%\label{designSpace}
+%%%=====================================================================
+
+As atividades estruturadas descrevem como um processo de negócio pode ser criado a partir da composição de atividades básicas. Compor atividades básicas permite que um processo expresse: fluxos de controle, tratamento de exceção, chamada a eventos externos ao processo, assim como também coordenar as trocas de mensagens entre as partes envolvidas em um processo de negócio \cite{BPEL20}.
+
+É possível definir atividades estruturadas através de fluxos de controle. Um controle sequencial é fornecido pelas atividades <sequence>, <if>, <while>, <repeatUntil> e <forEach>. É possível também definir concorrência e sincronização entre atividades de um determinado processo, esta atividade estruturada é assegurada pela atividade <flow> e uma variação paralela da atividade <forEach>. A escolha de um serviço especifico por um evento interno ou externo ao processo em um fluxo também é possível através da atividade <pick>.
+
+Em alguns casos é possível representar a semântica de uma atividade específica através da combinação de outras atividades, por exemplo, uma sequência pode ser descrita através da atividade <sequence>, entretanto a combinação da atividade de controle <flow> com atividades básicas como <receive> por exemplo definindo as ligações de um fluxo corretamente, é possível descrever sequências sem uso da atividade nativa <sequence>. Desta maneira é possível combinar atividades arbitrariamente para aumentar a expressividade da linguagem \cite{BPEL20}. A seguir descreveremos as atividades estruturadas do padrão WS-BEPL2.0.
+
+<sequence>: A atividade <sequence> é responsável por expressar a sequencia de uma ou mais atividades em ordem léxica. Esta atividade só finaliza sua execução depois que a ultima atividade de seu escopo é executada. O código abaixo demonstra a sintaxe da atividade de controle <sequence> \cite{BPEL20}. A listagem a seguir demonstra a sintaxe da atividade <sequence>.
+
+\lstinputlisting[language=XML, caption={Sintaxe da atividade sequence.}, label=sequence]{CodigosXML/sequence.xml}
+
+<if>: A atividade de controle <if>, define um comportamento condicional para um fluxo a partir da avaliação de uma expressão booleana. É possível aninhar varias condições utilizando a atividade <if> ou o opcional <elseif>, seguidos por um elemento <else> opcional, que servirá como elemento default em caso de nenhuma das opções aninhadas serem avaliadas verdadeiramente. A partir da a avaliação verdadeira de uma expressão a atividade envolvida pelo escopo da atividade <if> é executada, caso contrario o elemento <else> ou <elseif> são executados em sequencia. Esta atividade de controle só termina quando as atividades executadas através das avaliações das expressões são encerradas, ou imediatamente quando uma <condição> não é avaliada como true e nenhum ramo <else> é especificado \cite{BPEL20}. A listagem a seguir demonstra a sintaxe da atividade <if>.
+
+\lstinputlisting[language=XML, caption={Sintaxe da atividade if.}, label=if]{CodigosXML/if.xml}
+
+<while>: Assim como nas linguagens de programação tradicionais a atividade <while> no BPEL 2.0 representa a repetição de uma ou mais atividades em seu escopo, onde a execução de uma iteração é executada após uma expressão booleana ser avaliada verdadeira. \cite{BPEL20}. A listagem a seguir demonstra a sintaxe da atividade <while>.
+
+\lstinputlisting[language=XML, caption={sintaxe da atividade while.}, label=While]{CodigosXML/while.xml}
+
+<repeatUntil>: Assim como <while>, a atividade de controle <repeatUntil> também representa uma execução repetida de uma ou mais atividades em seu escopo, esta repetição é executada ate que a avaliação de uma dada expressão booleana deixe de ser verdadeira, a avaliação da expressão booleana é feita depois de cada iteração desta atividade de controle, esta atividade é amplamente utilizada em situações que é necessária uma estrutura de controle que execute uma repetição pelo menos uma vez \cite{BPEL20}. A listagem a seguir demonstra a sintaxe da atividade <repeatUntil>.
+
+\lstinputlisting[language=XML,caption={Sintaxe da atividade repeat until.}, label=repeatUntil]{CodigosXML/repeatUntil.xml}
+
+<forEach>: A atividade <forEach> também pode executar varias atividades em paralelo, controlada por duas expressões <startCounterValue> e <finalCounterValue>, ao iniciar, esta atividade avalia estas duas expressões. Uma vez que estas expressões sejam avaliadas verdadeiramente, a atividade <forEach> irá executar sua atividade <scope> contida exatamente N+1 vezes, onde n é igual ao <finalCounterValue> menos o <startCounterValue>. Se essas expressões não retornam valores válidos, o processo BPEL: lança uma \textit{invalidExpressionValue}, e a atividade termina sua execução, ou caso o <startCounterValue> seja maior do que o <finalCounterValue>, a atividade <scope> não deve ser realizada e a atividade <forEach> está completa \cite{BPEL20}. A listagem a seguir demonstra a sintaxe da atividade <forEach>.
+
+\lstinputlisting[language=XML, caption={Sintaxe da atividade forEach}, label=forEach]{CodigosXML/foreach.xml}
+
+Existem outras atividades estruturadas na linguagem WS-BPEL, estas são listadas a seguir:
+
+\begin{itemize}
+
+\item[•] <pick>: Esta atividade de controle espera pela ocorrência de um evento específico em um conjunto de eventos, uma vez que este evento específico ocorre, imediatamente a atividade associada a este evento é executada. Uma vez que a atividade <pick> aceita um evento, ela não mais aceita eventos daquele conjunto de eventos. Esta atividade dispõe de um conjunto de ramos onde em cada um contendo uma associação evento-atividade \cite{BPEL20}. A atividade <pick> termina quando a atividade associada ao evento termina sua execução. 
+
+%Esta atividade tem duas formas de aceitar eventos, os do tipo <onManssage> e os do tipo <onAlarm>. Os eventos do tipo <onManssage> assemelham-se a uma atividade <receive> no sentido de que aguardam pela recepção de uma mensagem de entrada. Já os eventos do tipo <onAlarm> tem uma semântica diferente, pois este tipo de evento são baseados em temporizadores onde a duração deve ser especificada através de duas clausulas, a clausula <for> especifica previamente a duração do evento em zero ou negativamente, e a clausula <until> especifica um prazo onde o tempo pode ser atingido ou ultrapassado uma vez que estas condições temporais sejam atendidas o evento <onAlarm> é executado imediatamente\cite{BPEL20}. Desta maneira o evento <onAlarm> funciona assim como o próprio nome sugere, ou seja, em forma de um alarme que é disparado de acordo com sua condição de tempo. 
+%
+%Cada atividade escolhida pela atividade <pick> deve incluir pelo menos um <onMessage>.Uma forma desta atividade é usada quando uma nova instância de um processo de negócio deve ser criado mediante o recebimento de um evento <onMessage>. Esta forma de <pick> tem um atributo createInstance setado com um valor default yes. Neste caso, os eventos <pick> devem ser todos do tipo <onMessage> \cite{BPEL20}. A listagem a seguir demonstra a sintaxe da atividade <pick>.
+
+%\lstinputlisting[language=XML]{pick.xml}
+
+\item[•] <flow>: A atividade <flow> é responsável por promover sincronização e concorrência entre duas ou mais atividade, de acordo com a necessidade do processo de negócio. Com esta atividade, serviços específicos em um processo de negócio podem ser executados paralelamente, ou simultaneamente \cite{BPEL20}. A listagem a seguir demonstra a sintaxe da atividade <flow>.
+
+%\lstinputlisting[language=XML]{flow.xml}  
+
+\end{itemize}
+
+%%%=====================================================================
+%\subsection{Meta-modelo Ecore (\textit{Models Plugin Module})}
+%%\label{cndComponents}
+%%%=====================================================================
+%
+%Para aumentar o número de plataformas especificas do método $\pi$-SOD-M para WS-BPEL 2.0, é necessário gerar um meta-modelo capaz de expressar modelos específicos da linguagem de orquestração WS-BPEL 2.0. A implementação deste modelo é definida em um arquivo .ecore e possui uma definição relacionada ao modulo de geração de modelos genmodel do Eclipse. Genmodel é um formato de arquivo intermediário usado para produzir o editor de sintaxe para cada meta-modelo, a partir do arquivo .ecore o plugin editor  pode ser criado de acordo com a definição genmodel, desta maneira modelos podem ser especificados, editados e gerenciados.
+%
+%Com o auxilio deste conjunto de ferramentas, é possível  criar todos os modelos necessários para o desenvolvimento de uma aplicação em $\pi$-SOD-M. Deste modo pode-se especificar editores para todos os modelos $\pi$-SOD-M: $\pi$-\textit{usecase} editor, $\pi$-\textit{ServiceProcess} editor, editor $\pi$-\textit{ServiceComposition} e editor $\pi$-PEWS \cite{Placido}. O complemento proposto, disponibilizará um editor adicional a metodologia $\pi$-SOD-M para a plataforma especifica WS-BPEL 2.0.
+%
+%O uso destes editores no processo de especificação de modelos pode ser feito em todos os três níveis de abstração da metodologia $\pi$-SOD-M. Esta especificação pode apenas ser realizada partindo de um nível mais alto de abstração ($\pi$-\textit{UseCase}) para o mais baixo, ou seja, o mais próximo ao código ($\pi$-\textit{ServiceCompositionModel}) desta forma seguindo os conceitos MDA. Embora existam editores para cada modelo na metodologia, ainda se faz necessário o uso de um outros componentes (\textit{Mapping Plugin Module}), para realizar transformações entre eles. 
+%
+%%%=====================================================================
+%\subsection{Geração do meta-modelo Ecore para a plataforma WS-BPEL 2.0}
+%%\label{cndComponents}
+%%%=====================================================================
+%
+%A IDE eclipse juntamente com o \textit{plugin Ecore Tools} fornece um ambiente completo para criar, editar e manter modelos\textit{Ecore}. Este componente facilita a manipulação de modelos Ecore, com um editor gráfico e faz a ponte para outras ferramentas \textit{Ecore} existentes, tais como: ferramentas para validação, pesquisa, comparação, geradores etc.
+%
+%O assistente \textit{EMF Model} cria arquivos de modelo .core baseados em arquivos Java anotados em um projeto, em XML Schemas e em modelos de classe \textit{Rational Rose}, ou copiados diretamente de modelos core existentes. Para criar modelos WS-BPEL especificados usando conceitos que estão em um nível mais alto do que classes e métodos simples é necessário gerar um meta-modelo que dê suporte a esta tarefa. Desta maneira baixamos o arquivo com esquema .xsd de processo BPEL executável diretamente do site da mantenedora do padrão a W3C \footnote{ URL do arquivo XSD do BPEL executable: \url{ http://docs.oasis-open.org/wsbpel/2.0/CS01/process/executable/ws-bpel_executable.xsd}}, para utilizarmos como entrada do \textit{EMF Model}.
+%
+%Uma vez que o meta-modelo \textit{Ecore} da linguagem WS-BPEL esteja criado é possível gerar modelos de orquestrações de serviços WS-BPEL de acordo com a especificação do meta-modelo gerado. De posse de modelos BPEL.ecore é possível criar regras de transformação do modelo $\pi$-\textit{ServiceCompositionModel} para um modelo gerado pelo meta-modelo BPEL. Desta maneira, posteriormente \textit{scripts} de transformações de modelo para texto podem ser implementadas para que seja possível gerar código BPEL executável.
+%
+%
+%=====================================================================
+\section{WS-BPEL no contexto $\pi$-SOD-M}%4.2
+\label{cdn}
+%=====================================================================
+
+
+Em construção !!!
+
+%%=====================================================================
+\section{Adaptação $\pi$-\textit{Sercive Composition Model}}%4.3
+\label{cdn}
+%=====================================================================
+
+
+Em construção !!!
+
+%%=====================================================================
+\section{Transformação PIM-PSM (WS-BPEL)}%4.4
+\label{cdn}
+%=====================================================================
+
+
+
+Em construção !!!
+
+
+%=====================================================================
+\subsection{Regras de Transformação (\textit{Plugin Module})}%4.4.1
+\label{cndActivities}
+%=====================================================================
+
+O processo de transformação entre modelos consiste em especificar uma entidade de um modelo fonte como entrada, e transforma-lo em uma entidade do modelo de destino tendo o resultado da transformação como saída \cite{Placido}. Tanto o modelo de entrada como o modelo de saída devem estar de acordo com as regras de modelagem de seus meta-modelos.  Existem diversos tipos de transformação de modelos que diferem nas suas entradas e saídas e também no modo como são expressas \cite{miller2003}.
+
+Transformações entre modelos também é uma forma de garantir a consistência de um conjunto de modelos de uma plataforma em especifico, de acordo com a modelagem proposta por um engenheiro de software. O objetivo final do emprego de transformações entre modelos no desenvolvimento de aplicações é reduzir o esforço empregado na construção de um software, assim como também o número de erros. Este processo automatiza a construção, modificação e documentação de um software sempre que necessário \cite{Jouault:2005:TMA}. 
+
+Em $\pi$-SOD-M, (Neto) define transformações verticais entre modelos em dois níveis: de modelos PIM's para modelos PSM's e de modelos PSM's para código de maquina executável.  Três modelos de transformações são definidos em $\pi$-SOD-M: $\pi$-Use Case para $\pi$-\textit{Service Process} (PIM para PIM); $\pi$-\textit{Service Process} para $\pi$-\textit{Service Composition} (PIM para PIM); e $\pi$-\textit{Service Composition} para $\pi$-PEWS (PIM para PSM). Nós propomos aumentar o número de modelos de transformações, expandindo o leque de plataforma especifica do método $\pi$-SOD-M, adicionando um modelo de transformação no nível de PSM para a linguagem WS-BPEL 2.0, complementando o método com o modelo de transformação  $\pi$-\textit{Service Composition} para WS-BPEL.
+
+Todas as regras de transformações entre modelos propostas na metodologia  $\pi$-SOD-M são descritas em linguagem natural (Neto). Estas regras asseguram a corretude entre os conceitos especificados em cada nível de abstração proposto pela metodologia, assim como também, no refinamento e processamento das transformações em diferentes níveis. A Figura 4.1 ilustra o conjunto de tipos de regras que são definidos na metodologia $\pi$-SOD-M para cada tipo de transformação. 
+
+\figura{Modelo de regras de transformação entra entidades.} %\citeonline[p.~41]{deSouza:2005}.}
+       {fig:Sign:Peirce}
+       {AT6.png}
+       {0.500}
+       {0}
+
+As entidades ilustradas ao lado esquerdo da figura representam os elementos do meta-modelo fonte enquanto que as entidades ilustradas do lado direito representam os elementos do modelo de destino. A Figura 4.1a ilustra a regra de transformação em que uma única entidade de origem é transformada numa entidade do modelo alvo. As regras ilustradas na figura 4.1b são mais avançadas, onde  um elemento de origem é transformado em dois ou mais elementos diferentes no modelo alvo, por exemplo um elemento  "A", pode  gerar um elemento "B" e um elemento "C" no modelo alvo.
+
+
+
+
+
+Em construção!!!!
+
+%%
+%%A Figura 4.2 ilustra o processo de transformação entre modelos da metodologia $\pi$-SOD-M passando pela modelagem de  caso de uso com o meta-modelo $\pi$-UseCase, até a ultima etapa de modelagem (a modelagem da composição de serviços) até o $\pi$-\textit{ServiceCompositionModel}. Os balões azuis 
+%%
+%%\figura{Transformação de modelo para modelo da metodologia $\pi$-SOD-M \cite{Placido}}
+%%       {fig:Sign:Peirce}
+%%       {Atlmodeltomdeltransformatio.png}
+%%       {0.400}
+%%       {0}
+%%
+%%Na Figura 4.2 estão representados os componentes de modelagem envolvidas no processo total da transformação, passando por $\pi$-UseCase, até $\pi$-PEWS Model executado no ambiente $\pi$-SOD-M. Nosso complemento implementou regras de mapeamento do modelo $\pi$-Service Composition Model para o modelo BPEL executable. Nas subseções seguintes descreveremos todas as regras de transformações de modelos que foram realizadas neste trabalho.
+%
+\subsubsection{Mapeando uma Action no $\pi$-SCM para Role no BPELexecutable}
+
+%Uma action no modelo fonte corresponde a uma ou varias operações de um Business Colaborator (patnerLink). Em WS-BPEL só é possível a conversação entre um Service provider e um Service requesters que contenham varias  operações através da tipagem dos patnerlinks utilizando a marcação patnerLinkType. Uma vez que isto acontece para cada operação de um serviço, podemos associar um nome e o portType para sua invocação através da marcação Role. Desta maneira uma action no modelo fonte é mapeada para um Role no modelo alvo.
+
+\subsubsection{Mapeando um Service Activity no $\pi$-SCM para um PatnerLinkType no BPELexecutable}
+
+%Um Service Activity no modelo fonte é uma composição de duas ou mais operações, desta maneira, mapeamos um Service Activity  para um PatnerLinkType no modelo alvo, pois PatnerLinkType são responsáveis por definir qual o tipo papel que o parceiro de negócio terá na composição de serviços BPEL. 
+%
+\subsubsection{Mapeando um Control Nodes no $\pi$-SCM para um Structured Activity no BPELexecutable}
+
+%Um Control Node no modelo fonte, é mapeado para uma dentre as varias atividades estruturada no modelo de alvo.  Este mapeamento ocorre de acordo com um dos tipos de Control Node (merge, decision, join, fork) para uma das seguintes atividades estruturadas:
+
+\begin{itemize}
+
+\item[•] Caso uma sequencia de operações seja especificada um Control Node será mapeado para uma atividade estruturada sequence; 
+
+\item[•] Caso um Control Node seja especificado como uma execução de várias operações em paralelo  ou a junção do resultado de várias operações em paralelo, sera mapeado para um flow;
+
+\item[•] Caso um  Control Node seja especificado como como uma escolha (Choice) entre duas operações será mapeado para uma atividade estruturada Pick.
+
+\end{itemize}
+
+\subsubsection{Mapeando um Business Colaborator no $\pi$-SCM para um PatnerLink no BPELexecutable}
+
+Um Business Colaborator no modelo fonte é transformado para um PatnerLink no modelo alvo, ambas as estruturas são colaboradores de negócios internos e externos ao processo.
+
+\subsubsection{Mapeando um Rule:Condition no $\pi$-SCM para um Sequence Invoke PortTypes (operações) no BPELexecutable}
+
+Um Rule:Condition no modelo fonte é um conjunto de operações com um nome especifico, por exemplo a Rule:Condition buyMusic é a composição das operações pagamento e verificação de pagamento, então mapeamos para o modelo alvo como uma sequencia de operações especificas de parceiro de negocio.
+
+
+
+
+
+
+\figura{Ambiente de desenvolvimento $\pi$-SOD-M mais o complemento para a plataforma BPEL. Adaptado de \cite{Placido}}
+       {fig:Sign:Peirce}
+       {ambientededesenvolvimentopisodm.png}
+       {0.640}
+       {0}
+
+A Figura 4.1 ilustra os três componentes que formam o ambiente de desenvolvimento do $\pi$-SOD-M. Como pode ser observado, todo o ambiente é executado na IDE Eclipse. O primeiro componente é o plugin de modelagem (\textit{Models Plug-in}), este compreende os componentes que descrevem os meta-modelos $\pi$-SOD-M e como estes modelos devem ser criados. Existem quatro componentes de meta-modelagem, onde todos os componentes do módulo do plug-in de mapeamento (\textit{Mappings Plugins}) dependem das definições feitas nesta camada \cite{Placido}.
+
+Quando uma transformação de modelo é executada, os modelos criados devem estar em conformidade com seus respectivos meta-modelos. Cada vez que uma transformação é executada, é realizada uma verificação de consistência do modelo fonte e do modelo alvo, para garantir a coerência entre as transformações dos modelos. Uma vez que todas as transformações de modelos forem completadas o modelo PSM estará pronto, e poderá ser traduzido em código de uma plataforma especifica em particular. 
+
+Originalmente $\pi$-SOD-M, leva a transformação de modelo para código PEWS. Com nosso complemento, o $\pi$-SOD-M aumentará o leque de opções tendo como possibilidade de transformação de plataforma específica à linguagem de orquestração de serviços WS-BPEL 2.0. A transformação do modelo PSM em código é a última fase do $\pi$-SOD-M. O componente de geração de código \textit{Code Generation} depende do PSM gerado pelo último componente de transformação. 
+
+
+%%%%=====================================================================
+%%\subsection{Accleo Code Generation (Code Generation Module)}
+%%%\label{cndActivities}
+%%%%=====================================================================
+%%
+%%$\pi$-SOD-M faz uso do componente $\pi$-PEWS como intermediador das transformações de modelo para código fonte PEWS. Nosso complemento fornece a metodologia $\pi$-SOD-M um componente que intermediá as transformações de modelo para código fonte WS-BPEL 2.0. Este é o ultimo passo da metodologia antes de gerar código fonte executável. O componente responsável pela geração de código fonte é o (Code Generation Module). Este componente foi implementado usando Acceleo.
+%%
+%%Accleo é um gerador de código de implementação da especificação Model-to-text do OMG. Acceleo ajuda o desenvolvedor a lidar com o ciclo de vida de seus geradores de código. Desta maneira, é possível criar rapidamente e facilmente o seus geradores a partir de um modelo já existente.  Acceleo pode facilmente construir,editar e gerenciar scripts para a transformar modelos Ecore em código fonte.
+%%
+%%A transformação de modelo para texto é o ultimo passo da metodologia $\pi$-SOD-M e é realizado através do componente de geração de código (Code generation level). Este componente nada mais é do que um gerador de código BPEL. O código é produzido a partir de um modelo BPEL, depois de ser gerada por uma transformação do modelo a partir do modelo $\pi$-ServiceComposition. Este componente foi implementado usando Acceleo 3.0. A listagem 4.1 apresenta a transformação de texto da tag <porcess> da linguagem de orquestração WS-BPEL 2.0, direto de um modelo.ecore.
+%%
+%%\begin{lstlisting}
+%%[comment encoding = UTF-8 /]
+%%[module generate('/WS-BPEL-2.0-ExecutableMetaModel/model/executable.ecore')]
+%%
+%%[template public generateElement(aTProcess : TProcess)]
+%%[comment @main/]
+%%
+%%[file (aTProcess.name.concat('.bpel'), false, 'UTF-8')]
+%%
+%%<!-- ToPublishMusic BPEL Process -->
+%%<!-- Date:  -->
+%%<bpel:process name= "[aTProcess.name/] targetNamespace= [aTProcess.targetNamespace/]"
+%%queryLanguage= "[aTProcess.queryLanguage/]"
+%%expressionLanguage= "[aTProcess.expressionLanguage/]"
+%%suppressJoinFailure= "[aTProcess.suppressJoinFailure/]"
+%%exitOnStandardFault= "[aTProcess.exitOnStandardFault/]">
+%%
+%%</bpel:process>
+%%
+%%</process>
+%%[/file]
+%%
+%%[/template]
+%%
+%%\end{lstlisting}
+%%
+%%Observe que das linhas de 1 a 6 e de 20 a 22 temos a sintaxe do Accleo para delimitar o escopo de um script de transformação para texto. Na linha 7 o comando Accleo que transforma a extensão do script para o tipo de arquivo da linguagem de destino no nosso caso um arquivo .bpel. Entre as linhas de 11 a 15 a tag <process> tem seus atributos preenchidos pelos comandos do extrator Accleo.
+%%
+%%%\begin{lstlisting}
+%%%
+%%%[comment encoding = UTF-8 /]
+%%%[module generate('/WS-BPEL-2.0-ExecutableMetaModel/model/executable.ecore')]
+%%%
+%%%[template public generateElement(aTProcess : TProcess)]
+%%%[comment @main/]
+%%%
+%%%[file (aTProcess.name.concat('.bpel'), false, 'UTF-8')]
+%%%
+%%%<!-- ToPublishMusic BPEL Process -->
+%%%<!-- Date:  -->
+%%%<bpel:process name= "[aTProcess.name/] targetNamespace= [aTProcess.targetNamespace/]"
+%%%queryLanguage= "[aTProcess.queryLanguage/]"
+%%%expressionLanguage= "[aTProcess.expressionLanguage/]"
+%%%suppressJoinFailure= "[aTProcess.suppressJoinFailure/]"
+%%%exitOnStandardFault= "[aTProcess.exitOnStandardFault/]">
+%%%
+%%% <!-- Import the client WSDL -->
+%%%	[for (p: TImport | aTProcess.import) separator('\n')]
+%%%     <bpel:import location="[p.location/]" namespace="[p.namespace/]" importType="[p.importType/]"/>
+%%%    [/for]
+%%%
+%%%    <!-- ================================================================= -->         
+%%%    <!-- PARTNERLINKS                                                      -->
+%%%    <!-- List of services participating in this BPEL process               -->
+%%%    <!-- ================================================================= -->         
+%%%    <bpel:partnerLinks>
+%%%        <!-- The 'client' role represents the requester of this service. -->
+%%%        [for (p: TPartnerLink | partnerLinks.partnerLink) separator('\n')]
+%%%		<bpel:partnerLink name="[p.name/]"
+%%%                     partnerLinkType="[p.partnerLinkType/]"
+%%%                     myRole="[p.partnerRole/]"
+%%%                     />
+%%%		[/for]
+%%%    </bpel:partnerLinks>
+%%%  
+%%%    <!-- ================================================================= -->         
+%%%    <!-- VARIABLES                                                         -->
+%%%    <!-- List of messages and XML documents used within this BPEL process  -->
+%%%    <!-- ================================================================= -->         
+%%%    <bpel:variables>
+%%%        <!-- Reference to the message passed as input during initiation -->
+%%%        [for (p: TVariable | variables.variable) separator('\n')]
+%%%		<bpel:variable name="[p.name/]"
+%%%                  messageType="[p.messageType/]"/>
+%%%        [/for]       
+%%%        <!-- 
+%%%          Reference to the message that will be returned to the requester
+%%%          -->
+%%%		[for (p : TVariable | variables.variable)]
+%%%			<bpel:variable name="[p.name/]"
+%%%                  messageType="[p.messageType/]"/>
+%%%		[/for]
+%%%        
+%%%    </bpel:variables>
+%%%
+%%%    <!-- ================================================================= -->         
+%%%    <!-- ORCHESTRATION LOGIC                                               -->
+%%%    <!-- Set of activities coordinating the flow of messages across the    -->
+%%%    <!-- services integrated within this business process                  -->
+%%%    <!-- ================================================================= -->         
+%%%    <bpel:sequence name="[aTProcess.sequence.name/]">
+%%%	
+%%%	activity?
+%%%
+%%%	</bpel:sequence>
+%%%</bpel:process>
+%%%
+%%%</process>
+%%%[/file]
+%%%
+%%%[/template]
+%%%
+%%%
+%%%\end{lstlisting}
+%%
+%%A listagem 4.2 representa a especificação Accleo de patnerlinks do modelo BPEL para código. Como um patnerlink é uma tag que repetida para todos os serviços que são passeiros da composição no script BPEL, mais especificamente entre as linhas 7 a 10 utilizamos para executar a transformação de modelo para texto o comando de repetição [for] para que ele execute de acordo com a expressão associada em seus parâmetros todas as ocorrências das tags Patnerlinks que estejam especificadas no modelo.
+%%
+%%\begin{lstlisting}
+%%<!-- ================================================================= -->         
+%%    <!-- PARTNERLINKS                                                      -->
+%%    <!-- List of services participating in this BPEL process               -->
+%%    <!-- ================================================================= -->         
+%%    <bpel:partnerLinks>
+%%        <!-- The 'client' role represents the requester of this service. -->
+%%        [for (p: TPartnerLink | partnerLinks.partnerLink) separator('\n')]
+%%		<bpel:partnerLink name="[p.name/]"
+%%                     partnerLinkType="[p.partnerLinkType/]"
+%%                     myRole="[p.partnerRole/]"
+%%                     />
+%%		[/for]
+%%    </bpel:partnerLinks>
+%%\end{lstlisting}
+%%
+%%A listagem 4.3 nas linhas 4 a 7 e nas linhas 11 a 14 demonstram a transformação de um modelo BPEL para código, as variáveis que serão utilizadas pela composição de serviços. esta transformação é similar a a transformação de patnerlinks, tendo como diferencial a passagem de tipos de mensagens trocados entre os parceiros. 
+%%
+%%\begin{lstlisting}
+%%<bpel:variables>
+%%        <!-- Reference to the message passed as input during initiation -->
+%%        [for (p: TVariable | variables.variable) separator('\n')]
+%%		<bpel:variable name="[p.name/]"
+%%                  messageType="[p.messageType/]"/>
+%%        [/for]       
+%%        <!-- 
+%%          Reference to the message that will be returned to the requester
+%%          -->
+%%		[for (p : TVariable | variables.variable)]
+%%			<bpel:variable name="[p.name/]"
+%%                  messageType="[p.messageType/]"/>
+%%		[/for]
+%%        
+%%    </bpel:variables>
+%%\end{lstlisting}
+%%
+%
+%
+%=====================================================================
+\section{Comparação da geração de código WS-BPEL e $\pi$-PEWS}%4.5
+\label{cdn}
+%=====================================================================
+
+
+Em construção !!!
+
+%%%=====================================================================
+%\section{ \textit{Policy-based Service Oriented Development Methodology} ($\pi$-SOD-M)}%4.6
+%%\label{$\pi$-SOD-M}
+%%=====================================================================
+%
+%
+%
+%$\pi$-SOD-M é uma metodologia baseada em MDA que fornece uma estrutura para a construção de composições de serviços e seus requisitos não funcionais associados. $\pi$-SOD-M propõe a criação de um conjunto de modelos em níveis de abstração diferentes que representam os conceitos de \textit{viewpoints} MDA, assim como também, as transformações entre estes modelos \cite{Placido}. $\pi$-SOD-M é uma extensão da metodologia SOD-M.
+%
+%Esta metodologia define uma abordagem orientada a serviços que fornece um conjunto de diretrizes para a construção de sistemas compostos por serviços, colocando os serviços como elemento fundamental de todo o processo de desenvolvimento. $\pi$-SOD-M amplia os modelos SOD-M capacitando-os para a inclusão de requisitos não funcionais durante o processo de modelagem. Os modelos que são adicionados pela metodologia $\pi$-SOD-M são: \textit{use case model, extended use case model, service process model e service composition model} \cite{Placido}.
+%
+%$\pi$-SOD-M fornece uma estrutura conceitual para capturar os requisitos essenciais do domínio do sistema, em modelos de alto nível de abstração (\textit{Computation Independent Model}, CIM), também é possível obter modelos mais especializados independente de plataforma especifica (\textit{Platform Independent Mode}, PIM), que são projetados para especificar detalhes do sistema com um maior nível de expressividade que o modelo anterior. Uma vez de posse destes modelos, é possível adicionar detalhes específicos da plataforma de destino, transformando estes modelos em  \textit{Platform Specific Mode} (PSM), e por fim transformar estes modelos de plataforma especifica em código de maquina executável \cite{Placido}. A Figura 2.7 ilustra os modelos que compõem a metodologia $\pi$-SOD-M sobrepondo os modelos no contexto arquitetura MDA demonstrando desta maneira quais modelos são estendidos pela abordagem $\pi$-SOD-M.
+%
+%\figura{SOD-M e os modelos estendidos $\pi$-SOD-M} %\citeonline[p.~41]{deSouza:2005}.}
+%       {fig:Sign:Peirce}
+%       {PI-SOD-M.png}
+%       {0.400}
+%       {0}
+%
+%Como descrito anteriormente $\pi$-SOD-M estende a metodologia SOD-M adicionando aos seus modelos a noção de políticas. Desta maneira é possível modelar os requisitos funcionais, de uma composição de serviços, e inserir restrições a estes requisitos de acordo com a necessidade do domínio do processo de negócio. A seguir descreveremos todos os modelos $\pi$-SOD-M:
+%
+%O modelo $\pi$-\textit{Usecase}: Este modelo descreve os requisitos do sistema por meio de serviços, assim como também as restrições e os requisitos de qualidade. 
+%
+%O modelo $\pi$-\textit{ServiceProcess}: Este modelo refina os casos de uso transformando-os em serviços ou funções. Isto torna possível definir o conceito de contrato de serviço para representar a entrada de dados dos serviços e as restrições de saída dos dados fornecidos pelos serviços da composição \cite{Placido}. Este modelo propõe a definição de contratos nos serviços da composição agrupando um conjunto de restrições descritas no modelo $\pi$-\textit{Usecase}.  
+%
+%O modelo $\pi$-\textit{ServiceComposition} fornece os conceitos de Política que agrupam os contratos dos requisitos não-funcionais, como por exemplo, as restrições de segurança, tais como contratos de acesso de autenticação, privacidade de dados ou transações são agrupadas em uma política de segurança \cite{Placido}. 
+%
+%O modelo $\pi$-PESW: Este modelo é proposto pela metodologia como PSM. Este modelo é gerado a partir do modelo $\pi$-\textit{ServiceComposition}, e é uma representação de uma especificação PEWS. A partir de um modelo de $\pi$-PEWS é possível gerar o código de composição de serviços. $\pi$-SOD-M define também as regras de transformação de modelo para modelo, a partir do modelo $\pi$-\textit{Usecase} para o modelo $\pi$-\textit{ServiceComposition}; e usa transformações de modelo para texto para gerar o código de implementação correspondente na língua PESW \cite{Placido}.
+%
+%\subsection{Conceitos da metodologia}
+%
+%Os conceitos utilizados pela metodologia $\pi$-SOD-M descrevem os conceitos chave que devem ser abordados na modelagem de aplicações baseadas em serviços. Assim como MDA, $\pi$-SOD-M tem três \textit{viewpoints} diferentes, para os níveis propostos pela literatura MDA:  CIM, PIM e PSM \cite{Placido}.
+%
+%Cada conceito pre-estabelecido pelos \textit{viewpoints}, são representados na metodologia por um metamodelo especifico. Estes conceitos são estruturados em três pontos de vista: 
+%
+%Visão de negócio: concentra-se nas características do negócio que são a base de um sistema de informação. Os conceitos que correspondem à Visão Empresarial descrevem os elementos de negócio \cite{Placido}.
+%
+%Visão de sistema: concentra-se sobre as principais características e processos para o sistema de informação em desenvolvimento. Tais conceitos, são utilizados para descrever as funcionalidades do sistema \cite{Placido}.
+%
+%Visão de política: concentra-se sobre requisitos não funcionais e restrições de negócio do sistema. Os conceitos que correspondem à visão de política descrevem os NFRs e restrições relacionadas com as funcionalidades do sistema \cite{Placido}. 
+%
+%
+%A Figura 2.8 ilustra os principais elementos da metodologia utilizada para a modelagem de uma aplicação.
+%
+%\figura{Conceitos $\pi$-SOD-M.} %\citeonline[p.~41]{deSouza:2005}.}
+%       {fig:Sign:Peirce}
+%       {conceitos.png}
+%       {0.400}
+%       {0}
+%
+%
+%%%% Local Variables: 
+%%%% mode: latex
+%%%% TeX-master: "main"
+%%%% End: 
+%
+%
+%O desenvolvimento de aplicações utilizando $\pi$-SOD-M consiste em gerar aplicações partindo de modelagens de caso de uso, uma vez que esta etapa de modelagem esteja completa, os casos de uso serão transformados em uma série de modelos com níveis de abstração diferentes como PIM, PSM e posteriormente gerar código que implementa de fato a aplicação.
+%
+%O $\pi$-SOD-M está organizado estruturalmente em três camadas, as quais se apoiam sobre os conceitos de níveis de abstração do MDA (CIM, PIM e PSM). Cada camada representa um conjunto de componentes que formam o núcleo de desenvolvimento do $\pi$-SOD-M \cite{Placido}, que se apresentam em: 1 - O componente de Meta-modelo; 2 - O componente de transformação entre modelos PIM-to-PIM ($\pi$-\textit{Use Case Model}, $\pi$-\textit{Service Pocess} e $\pi$-\textit{Service Composition Model}); 3- O componente de mapeamento de modelos PIM-para-PSM e 4 - O componente de geração de código, ou seja, a camada de transformação de modelo para texto.
+%
+%
+%$\pi$-SOD-M é uma abordagem para transformação entre modelos que integra
+%as atividades de requisitos, arquitetura orientada a serviço e serviços web. Essa
+%abordagem inclui descrição de metamodelos e um conjunto de mapeamentos entre
+%modelos. Além disso, inclui um ambiente integrado com a IDE Eclipse, e seus plugins, que dão suporte a transformações entre modelos.
+%
+%Desta maneira, esta metodologia apoia todo o seu desenvolvimento sobre a IDE Eclipse, mais especificamente utilizamos a versão do \textit{Eclipse Modeling Framework} (EMF). O Eclipse é um ambiente de desenvolvimento integrado, cujo  intuito está na construção do software em geral, a  versão EMF permite que desenvolvedores construam rapidamente aplicações robustas baseadas em modelos.
+
+%Para automatizar as transformações de modelo para modelo (\textit{Model to Model} - M2M) utilizamos a linguagem de transformação ATL (\textit{Atlas Transformation Language - ATL}). Já para as transformações de modelo em texto (\textit{Model to Text} – M2T), utilizamos a linguagem Accleo. Com base nestas transformações $\pi$-SOD-M utiliza estas linguagens para criar aplicações compostas por serviços baseados em especificação PEWS. A partir disto, o intuito referente à complementação $\pi$-SOD-M propõe aumentar o número de especificações de código para a plataforma WS-BPEL 2.0. A Figura 4.1 ilustra o ambiente de desenvolvimento $\pi$-SOD-M.
+
+%
+%
+%

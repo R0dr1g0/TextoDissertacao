@@ -1,0 +1,155 @@
+%=====================================================================
+% Arquivo: main.tex
+% Autor  : Macilon Araújo Costa Neto
+% Data   : 02/07/2012
+%=====================================================================
+\documentclass[header=ruled]{abnt}
+%=====================================================================
+% Utilização de pacotes.
+%=====================================================================
+\usepackage[T1]{fontenc}		% fontes PS com acentos
+\usepackage[english,brazil]{babel}	% idiomas permitidos
+\usepackage[utf8]{inputenc}	% edição direta com acentos
+%\usepackage{latexsym}		% símbolos extras do LaTeX
+\usepackage{amssymb}			% símbolos AMS do LaTeX
+\usepackage{pifont}			% símbolos checkmarks
+\usepackage{epsfig}			% tratamento de figuras EPS
+%\usepackage{multicol}		% tratamento de vários colunas
+\usepackage{fancyvrb}		% códigos Verbatim
+\usepackage{array}			% ambiente tabular avançado
+%\usepackage{singlespace}	% espaçamento simples
+\usepackage{fancyhdr}		% tratamento de cabeçalho
+\usepackage{subfigure}		% tratamento de subfiguras
+\usepackage{multirow}		% tratamento de várias linhas
+\usepackage{enumitem}		% tratamento dos enumeradores
+%\usepackage{rotating}		% rotacionar figuras/tabelas/etc
+\usepackage{listings}		% para inserir código no texto latex
+
+
+\usepackage{color}
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+
+\lstset{ %
+  language=XML,% the language of the code
+  basicstyle=\footnotesize,% the size of the fonts that are used for the code
+  numbers=left,% where to put the line-numbers
+  numberstyle=\tiny\color{gray},% the style that is used for the line-numbers
+  stepnumber=1,% the step between two line-numbers. If it's 1, each line 
+                                  % will be numbered
+  numbersep=5pt,% how far the line-numbers are from the code
+  backgroundcolor=\color{white},      % choose the background color. You must add \usepackage{color}
+  showspaces=false,               % show spaces adding particular underscores
+  showstringspaces=false,         % underline spaces within strings
+  showtabs=false,                 % show tabs within strings adding particular underscores
+  frame=single,                   % adds a frame around the code
+  rulecolor=\color{black},        % if not set, the frame-color may be changed on line-breaks within not-black text (e.g. comments (green here))
+  tabsize=1,                      % sets default tabsize to 2 spaces
+  captionpos=b,                   % sets the caption-position to bottom
+  breaklines=true,                % sets automatic line breaking
+  breakatwhitespace=false,        % sets if automatic breaks should only happen at whitespace
+  title=\lstname,                   % show the filename of files included with \lstinputlisting;
+                                  % also try caption instead of title
+  keywordstyle=\color{blue},% keyword style
+  commentstyle=\color{dkgreen},% comment style
+  stringstyle=\color{mauve},% string literal style
+  escapeinside={\%*}{*)},% if you want to add LaTeX within your code
+  morekeywords={*,...},% if you want to add more keywords to the set
+  deletekeywords={...}% if you want to delete keywords from the given language
+}
+
+
+
+%=====================================================================
+% Dados gerais sobre o documento da tese
+%---------------------------------------------------------------------
+\include{data}				% Arquivo com todos os dados
+%---------------------------------------------------------------------
+\usepackage[pdftitle={\tituloA},
+  pdfauthor={\autorA},
+  pdfsubject={Tese de Doutorado em Ciência da Computação},
+  pdfkeywords={\palavras},
+  bookmarks,
+  colorlinks,
+  breaklinks=true,
+  linkcolor=black,
+  citecolor=black,
+  filecolor=black,
+  urlcolor=black]{hyperref}		% usados para geração do PDF
+\usepackage[abnt-full-initials=yes,
+  abnt-etal-text=emph,
+  abnt-etal-list=0,
+  abnt-etal-cite=3]{abntcite}		% bibliografia do abntex
+%=====================================================================
+% Vários comandos utilizados no documento, incluído abreviaturas
+%---------------------------------------------------------------------
+\include{macros}
+%=====================================================================
+% Início do documento
+%---------------------------------------------------------------------
+\begin{document}        
+%\doublespacing			% Para atender a solicitação do Jair
+%=====================================================================
+% Definições para as páginas para o pré-textual do trabalho
+%---------------------------------------------------------------------
+\pagestyle{empty}
+\pagenumbering{roman}
+%=====================================================================
+% Conteúdo pré-textual
+%---------------------------------------------------------------------
+\include{pre-textual/capa}
+\setcounter{page}{1}
+\include{pre-textual/folha-rosto-averso}
+\include{pre-textual/folha-rosto-verso} %% Ficha Catalográfica
+\include{pre-textual/aprovacao}
+\include{pre-textual/dedicatoria}
+\pagestyle{plain}
+%\include{pre-textual/agradecimentos}
+\include{pre-textual/resumo}
+\include{pre-textual/abstract}
+\tableofcontents
+\listoffigures
+\listoftables 
+\input{pre-textual/abbreviations}
+\label{frontpages}
+\clearpage 
+%---------------------------------------------------------------------
+% Capítulos são numerados normalmente
+%---------------------------------------------------------------------
+\pagenumbering{arabic}
+\setcounter{page}{1}
+%=====================================================================
+% Conteúdo textual
+%---------------------------------------------------------------------
+% Documentos estruturados em capítulos, um arquivo para cada capítulo
+%---------------------------------------------------------------------
+\include{introduction}	% Introdução do trabalho
+\include{background}		% Fundamentos do trabalho
+\include{relateds}		% Trabalhos relacionados
+%\include{aladim}		% Linguagem para modelar a interação
+%\include{editor}		% Ferramenta para modelagem da interação
+\include{evaluation}	% Avaliação da linguagem ALaDIM
+%\include{inspection}	% Inspeção em modelos ALaDIM
+\include{closures}		% Considerações finais
+
+%=====================================================================
+% Conteúdo pós-textual
+%---------------------------------------------------------------------
+% Incluindo as referências bibliográficas
+%---------------------------------------------------------------------
+%\nocite{*}			% listando todo o arquivo .bib 
+\bibliography{main}		% arquivo .bbl
+%---------------------------------------------------------------------
+% Documento estruturado com apêndices, um arquivo para cada apêndice
+%---------------------------------------------------------------------
+%\appendix
+%\include{pos-textual/apendice1}	% Apêndice número 1
+%\include{pos-textual/apendice2}	% Apêndice número 2
+%=====================================================================
+% Fim do documento
+%---------------------------------------------------------------------
+\label{final}					% referência para a última página
+%---------------------------------------------------------------------
+\end{document}
+%=====================================================================

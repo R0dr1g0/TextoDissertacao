@@ -1,0 +1,73 @@
+﻿[comment encoding = UTF-8 /]
+[module generate('/WS-BPEL-2.0-ExecutableMetaModel/model/executable.ecore')]
+
+[template public generateElement(aTProcess : TProcess)]
+[comment @main/]
+
+[file (aTProcess.name.concat('.bpel'), false, 'UTF-8')]
+
+<!-- ToPublishMusic BPEL Process -->
+<!-- Date:  -->
+<bpel:process name= "[aTProcess.name/] targetNamespace= [aTProcess.targetNamespace/]"
+queryLanguage= "[aTProcess.queryLanguage/]"
+expressionLanguage= "[aTProcess.expressionLanguage/]"
+suppressJoinFailure= "[aTProcess.suppressJoinFailure/]"
+exitOnStandardFault= "[aTProcess.exitOnStandardFault/]">
+
+ <!-- Import the client WSDL -->
+	[for (p: TImport | aTProcess.import) separator('\n')]
+     <bpel:import location="[p.location/]" namespace="[p.namespace/]" importType="[p.importType/]"/>
+    [/for]
+ 
+         
+    <!-- ================================================================= -->         
+    <!-- PARTNERLINKS                                                      -->
+    <!-- List of services participating in this BPEL process               -->
+    <!-- ================================================================= -->         
+    <bpel:partnerLinks>
+        <!-- The 'client' role represents the requester of this service. -->
+        [for (p: TPartnerLink | partnerLinks.partnerLink) separator('\n')]
+		<bpel:partnerLink name="[p.name/]"
+                     partnerLinkType="[p.partnerLinkType/]"
+                     myRole="[p.partnerRole/]"
+                     />
+		[/for]
+    </bpel:partnerLinks>
+  
+    <!-- ================================================================= -->         
+    <!-- VARIABLES                                                         -->
+    <!-- List of messages and XML documents used within this BPEL process  -->
+    <!-- ================================================================= -->         
+    <bpel:variables>
+        <!-- Reference to the message passed as input during initiation -->
+        [for (p: TVariable | variables.variable) separator('\n')]
+		<bpel:variable name="[p.name/]"
+                  messageType="[p.messageType/]"/>
+        [/for]       
+        <!-- 
+          Reference to the message that will be returned to the requester
+          -->
+		[for (p : TVariable | variables.variable)]
+			<bpel:variable name="[p.name/]"
+                  messageType="[p.messageType/]"/>
+		[/for]
+        
+    </bpel:variables>
+
+    <!-- ================================================================= -->         
+    <!-- ORCHESTRATION LOGIC                                               -->
+    <!-- Set of activities coordinating the flow of messages across the    -->
+    <!-- services integrated within this business process                  -->
+    <!-- ================================================================= -->         
+    <bpel:sequence name="[aTProcess.sequence.name/]">
+	
+	activity?
+
+	</bpel:sequence>
+</bpel:process>
+
+</process>
+[/file]
+
+[/template]
+

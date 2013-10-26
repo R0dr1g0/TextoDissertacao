@@ -1,0 +1,5 @@
+<repeatUntil standard-attributes>
+	standard-elements
+		activity
+	<condition expressionLanguage="anyURI"?>bool-expr</condition>
+</repeatUntil>

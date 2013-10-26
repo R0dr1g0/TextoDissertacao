@@ -1,0 +1,5 @@
+ <wsp:Policy ... >
+   <wsp:ExactlyOne>
+     ( <wsp:All> ( <Assertion ...> ... </Assertion> )* </wsp:All> )*
+   </wsp:ExactlyOne>
+ </wsp:Policy> 

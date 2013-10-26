@@ -1,0 +1,94 @@
+This is BibTeX, Version 0.99d (TeX Live 2012/Debian)
+Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
+The top-level auxiliary file: main.aux
+A level-1 auxiliary file: pre-textual/capa.aux
+A level-1 auxiliary file: pre-textual/folha-rosto-averso.aux
+A level-1 auxiliary file: pre-textual/folha-rosto-verso.aux
+A level-1 auxiliary file: pre-textual/aprovacao.aux
+A level-1 auxiliary file: pre-textual/dedicatoria.aux
+A level-1 auxiliary file: pre-textual/resumo.aux
+A level-1 auxiliary file: pre-textual/abstract.aux
+A level-1 auxiliary file: introduction.aux
+A level-1 auxiliary file: background.aux
+A level-1 auxiliary file: relateds.aux
+A level-1 auxiliary file: evaluation.aux
+A level-1 auxiliary file: closures.aux
+The style file: abnt-alf.bst
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated wiz_functions (elt_size=4) to 6000 items from 3000.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Database file #1: abnt-options.bib
+Database file #2: main.bib
+Warning--entry type for "Wesley" isn't style-file defined
+--line 2487 of file main.bib
+I was expecting a `,' or a `}'---line 2523 of file main.bib
+ : 
+ : %11%
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+Repeated entry---line 2799 of file main.bib
+ : @article{Peltz
+ :               ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 2862 of file main.bib
+ : @techreport{miller2003
+ :                       ,
+I'm skipping whatever remains of this entry
+Reallocated wiz_functions (elt_size=4) to 9000 items from 6000.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated glb_str_ptr (elt_size=4) to 20 items from 10.
+Reallocated global_strs (elt_size=20001) to 20 items from 10.
+Reallocated glb_str_end (elt_size=4) to 20 items from 10.
++---------------------------------------------------------+
+| Estilo bibliografico abnt-alf.bst versao 1.53           |
+| Implementa a NBR6023, NBR10520 e NBR10523               |
+| Em caso de duvidas ou problemas com este estilo procure |
+| http://abntex.codigolivre.org.br                        |
++---------------------------------------------------------+
+You've used 34 entries,
+            6522 wiz_defined-function locations,
+            1392 strings with 15781 characters,
+and the built_in function-call counts, 56048 in all, are:
+= -- 6995
+> -- 1090
+< -- 1276
++ -- 1689
+- -- 322
+* -- 3377
+:= -- 6092
+add.period$ -- 120
+call.type$ -- 37
+change.case$ -- 369
+chr.to.int$ -- 78
+cite$ -- 28
+duplicate$ -- 6058
+empty$ -- 2117
+format.name$ -- 1607
+if$ -- 11579
+int.to.chr$ -- 7
+int.to.str$ -- 3
+missing$ -- 597
+newline$ -- 163
+num.names$ -- 140
+pop$ -- 739
+preamble$ -- 1
+purify$ -- 136
+quote$ -- 0
+skip$ -- 6427
+stack$ -- 1
+substring$ -- 2266
+swap$ -- 1921
+text.length$ -- 70
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 7
+warning$ -- 0
+while$ -- 243
+width$ -- 0
+write$ -- 493
+(There were 3 error messages)

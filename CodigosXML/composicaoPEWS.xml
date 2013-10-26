@@ -1,0 +1,26 @@
+ns namespaceA = "http:\\www.dimap.ufrn.br/MapsService.wsdl"
+ns namespaceB = "http:\\www.dimap.ufrn.br/HotelInformationService.wsdl"
+ns namespaceC = "http:\\www.dimap.ufrn.br/CarRentalService.wsdl"
+ns namespaceD = "http:\\www.dimap.ufrn.br/Entertainment/Service.wsdl"
+ns namespaceE = "http:\\www.dimap.ufrn.br/BankService.wsdl"
+ 
+alias chooseCity(in) = portType/chooseCity in namespaceA
+alias showMap(in,out) = portType/showMap in namespaceA
+alias searchHotel(in,out) = portType/searchHotel in namespaceB
+alias hotelInformation(in,out) = portType/hotelInformation in namespaceB
+alias selectHotel(in,out) = portType/selectHotel in namespaceB
+alias viewDetails(out) = portType/viewDetails in namespaceB
+alias reservationRoom(in,out) = portType/reservationRoom in namespaceB
+alias entertainmentsView(in,out) = portType/entertainmentsView in namespaceD
+alias searchCarRental(in,out) = portType/searchCarRental in namespaceC
+alias reservationCar(out) = portType/reservationCar in namespaceC
+alias setDataPayment(in) = portType/setDataPayment in namespaceE
+alias payment(in,out) = portType/payment in namespaceE
+alias getVoucherNumber(out) = portType/getVoucherNumber in namespaceE
+alias checkout(out) = portType/checkout in namespaceE
+ 
+service hotelLookup = (searchHotel.selectHotel.viewDetails)*
+service hotelReservation = hotelLookup.reservationRoom
+service payAndGetVoucher = payment || getVoucherNumber
+chooseCity.(showMap||(hotelReservation || hotelReservation.(entertainmentsView ||
+(searchCarRental.reservationCar)))).setDataPayment .payAndGetVoucher.Checkout

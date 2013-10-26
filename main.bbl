@@ -1,0 +1,225 @@
+\providecommand{\abntreprintinfo}[1]{%
+ \citeonline{#1}}
+\setlength{\labelsep}{0pt}\begin{thebibliography}{}
+\providecommand{\abntrefinfo}[3]{}
+\providecommand{\abntbstabout}[1]{}
+\abntbstabout{1.53 }
+
+\bibitem[Alves \emph{et al.} 2006]{BPEL20}
+\abntrefinfo{Alves \emph{et al.}}{ALVES \emph{et al.}}{2006}
+{ALVES, Alexandre; ARKIN, Assaf; ASKARY, Sid; BLOCH, Ben; CURBERA, Francisco;
+  GOLAND, Yaron; KARTHA, Neelakantan; STERLING; K\"{o}NIG, Dieter; MEHTA,
+  Vinkesh; THATTE, Satish; RIJN, Danny van~der; YENDLURI, Prasad; YIU, Alex.
+  \emph{{Web Services Business Process Execution Language Version 2.0}}. maio
+  2006.
+OASIS Committee Draft.}
+
+\bibitem[Arsanjani \emph{et al.} 2008]{arsanjani}
+\abntrefinfo{Arsanjani \emph{et al.}}{ARSANJANI \emph{et al.}}{2008}
+{ARSANJANI, Ali; GHOSH, Shuvanker; ALLAM, Abdul; ABDOLLAH, Tina; GANAPATHY,
+  Sella; HOLLEY, Kerrie. Soma: A method for developing service-oriented
+  solutions.
+\emph{IBM systems Journal}, IBM, v.~47, n.~3, p. 377--396, 2008.}
+
+\bibitem[Ba, Ferrari e Musicante 2005]{ba2005building}
+\abntrefinfo{Ba, Ferrari e Musicante}{BA; FERRARI; MUSICANTE}{2005}
+{BA, C.; FERRARI, M.H.; MUSICANTE, M. Building web services interfaces using
+  predicate path expressions.
+\emph{Proceedings of SBLP}, p. 147--160, 2005.}
+
+\bibitem[Ba, Ferrari e Musicante 2006]{Cheikh}
+\abntrefinfo{Ba, Ferrari e Musicante}{BA; FERRARI; MUSICANTE}{2006}
+{BA, Cheikh; FERRARI, Mirian~Halfeld; MUSICANTE, Martin~A. Composing web
+  services with pews: A trace-theoretical approach. In:  \emph{Web Services,
+  2006. ECOWS '06. 4th European Conference on}. [S.l.: s.n.], 2006. p. 65
+  --74.}
+
+\bibitem[Booth \emph{et al.} 2004]{w3c_webService}
+\abntrefinfo{Booth \emph{et al.}}{BOOTH \emph{et al.}}{2004}
+{BOOTH, David; HAAS, Hugo; MCCABE, Francis; NEWCOMER, Eric; CHAMPION, Michael;
+  FERRIS, Chris; ORCHARD, David. \emph{{Web Services Architecture}}.
+[S.l.], fev. 2004. Dispon{\'\i}vel em:
+  \htmladdnormallink{$<$http:\-/\-/www\-.w3\-.org\-/TR\-/2003\-/WD-ws-arch-20030808$>$}{http://www.w3.org/TR/2003/WD-ws-arch-20030808}.}
+
+\bibitem[Booth, McCabe e Champion]{W3Cwebservice}
+\abntrefinfo{Booth, McCabe e Champion}{BOOTH; MCCABE; CHAMPION}{}
+{BOOTH, David; MCCABE, Francis; CHAMPION, Michael. \emph{Web Services
+  Architecture - {W3C} Working Group Note 11 February 2004}.
+[S.l.]. Dispon{\'\i}vel em:
+  \htmladdnormallink{$<$http:\-/\-/www\-.w3\-.org\-/TR\-/2004\-/NOTE-ws-arch-20040211\-/$>$}{http://www.w3.org/TR/2004/NOTE-ws-arch-20040211/}.}
+
+\bibitem[Brown \emph{et al.} 2005]{brown}
+\abntrefinfo{Brown \emph{et al.}}{BROWN \emph{et al.}}{2005}
+{BROWN, Alan; JOHNSTON, Simon~K; LARSEN, Grant; PALISTRANT, Jim. Soa
+  development using the ibm rational software development platform: a practical
+  guide.
+\emph{Rational Software}, 2005.}
+
+\bibitem[Castro, Marcos e Wieringa 2009]{towards}
+\abntrefinfo{Castro, Marcos e Wieringa}{CASTRO; MARCOS; WIERINGA}{2009}
+{CASTRO, Valeria De; MARCOS, Esperanza; WIERINGA, Roel. Towards a
+  service-oriented mda-based approach to the alignment of business processes
+  with it systems: from the business model to a web service composition model.
+\emph{International Journal of Cooperative Information Systems}, World
+  Scientific, v.~18, n.~02, p. 225--260, 2009.}
+
+\bibitem[Dustdar e Kr\"{a}mer 2008]{Dustdar:2008}
+\abntrefinfo{Dustdar e Kr\"{a}mer}{DUSTDAR; KR\"{a}MER}{2008}
+{Introduction to special issue on service oriented computing (soc).
+\emph{ACM Trans. Web}, ACM, New York, NY, USA, v.~2, n.~2, p. 10:1--10:2, maio
+  2008.
+ISSN 1559-1131.
+Dispon{\'\i}vel em:
+  \htmladdnormallink{$<$http:\-/\-/doi\-.acm\-.org\-/10\-.1145\-/1346337\-.1346338$>$}{http://doi.acm.org/10.1145/1346337.1346338}.}
+
+\bibitem[Feig \emph{et al.} 2007]{ZHANG}
+\abntrefinfo{Feig \emph{et al.}}{FEIG \emph{et al.}}{2007}
+{FEIG, Ephraim; ZHANG, Liang-Jie~(LJ); ARSANJANI, Ali; XU, Zhiwei. Services
+  computing in action: Services architectures. In:  \emph{Web Services, 2007.
+  ICWS 2007. IEEE International Conference on}. [S.l.: s.n.], 2007. p. xxxiv.}
+
+\bibitem[Jouault e Kurtev 2006]{Jouault:2005:TMA}
+\abntrefinfo{Jouault e Kurtev}{JOUAULT; KURTEV}{2006}
+{JOUAULT, Fr{\'e}d{\'e}ric; KURTEV, Ivan. Transforming models with atl. In:
+  \emph{Proceedings of the 2005 international conference on Satellite Events at
+  the MoDELS}. Berlin, Heidelberg: Springer-Verlag, 2006.  (MoDELS'05), p.
+  128--138.
+ISBN 3-540-31780-5, 978-3-540-31780-7. Dispon{\'\i}vel em:
+  \htmladdnormallink{$<$http:\-/\-/dx\-.doi\-.org\-/10\-.1007\-/11663430\underline{\
+  }14$>$}{http://dx.doi.org/10.1007/11663430_14}.}
+
+\bibitem[Kreger 2001]{kreger2001services}
+\abntrefinfo{Kreger}{KREGER}{2001}
+{KREGER, H. \emph{Web Services Conceptual Architecture (WSCA 1.0)}.
+[S.l.], maio 2001. Dispon{\'\i}vel em:
+  \htmladdnormallink{$<$http:\-/\-/www\-.csd\-.uoc\-.gr\-/\~{}hy565\-/newpage\-/docs\-/pdfs\-/papers\-/wsca\-.pdf$>$}{http://www.csd.uoc.gr/~hy565/newpage/docs/pdfs/papers/wsca.pdf}.}
+
+\bibitem[Leymann 2001]{leymann01wsfl}
+\abntrefinfo{Leymann}{LEYMANN}{2001}
+{LEYMANN, Frank. \emph{{Web Services Flow Language (WSFL 1.0)}}.
+[S.l.], maio 2001.}
+
+\bibitem[Miller e Mukerji 2003]{miller2003}
+\abntrefinfo{Miller e Mukerji}{MILLER; MUKERJI}{2003}
+{MILLER, J.; MUKERJI, J. \emph{MDA Guide Version 1.0.1}.
+[S.l.], 2003.}
+
+\bibitem[Neto 2012]{Placido}
+\abntrefinfo{Neto}{NETO}{2012}
+{NETO, Plácido~Antônio de Souza.
+\emph{A Methodology for Building Reliable Service-Based Applications}.
+Tese (Doutorado) --- Universidade Federal do Rio Grande do Norte, Departamento
+  de Informática e Matemática Aplicada, Natal-RN, 2012.}
+
+\bibitem[Papazoglou \emph{et al.} 2007]{Papazoglou_Traverso}
+\abntrefinfo{Papazoglou \emph{et al.}}{PAPAZOGLOU \emph{et al.}}{2007}
+{PAPAZOGLOU, M.P.; TRAVERSO, P.; DUSTDAR, S.; LEYMANN, F. Service-oriented
+  computing: State of the art and research challenges.
+\emph{Computer}, v.~40, n.~11, p. 38 --45, nov. 2007.
+ISSN 0018-9162.}
+
+\bibitem[Papazoglou e Georgakopoulos 2003]{Papazoglou:2003}
+\abntrefinfo{Papazoglou e Georgakopoulos}{PAPAZOGLOU; GEORGAKOPOULOS}{2003}
+{PAPAZOGLOU, M.~P.; GEORGAKOPOULOS, D. Introduction: Service-oriented
+  computing.
+\emph{Commun. ACM}, ACM, New York, NY, USA, v.~46, n.~10, p. 24--28, out. 2003.
+ISSN 0001-0782.
+Dispon{\'\i}vel em:
+  \htmladdnormallink{$<$http:\-/\-/doi\-.acm\-.org\-/10\-.1145\-/944217\-.944233$>$}{http://doi.acm.org/10.1145/944217.944233}.}
+
+\bibitem[Papazoglou e Heuvel 2007]{PapazoglouHeuvel:2007}
+\abntrefinfo{Papazoglou e Heuvel}{PAPAZOGLOU; HEUVEL}{2007}
+{PAPAZOGLOU, Mike~P.; HEUVEL, Willem-Jan. Service oriented architectures:
+  approaches, technologies and research issues.
+\emph{The VLDB Journal}, Springer-Verlag New York, Inc., Secaucus, NJ, USA,
+  v.~16, n.~3, p. 389--415, jul. 2007.
+ISSN 1066-8888.
+Dispon{\'\i}vel em:
+  \htmladdnormallink{$<$http:\-/\-/dx\-.doi\-.org\-/10\-.1007\-/s00778-007-0044-3$>$}{http://dx.doi.org/10.1007/s00778-007-0044-3}.}
+
+\bibitem[Papazoglou e Heuvel 2006]{papazoglou2006}
+\abntrefinfo{Papazoglou e Heuvel}{PAPAZOGLOU; HEUVEL}{2006a}
+{PAPAZOGLOU, Michael~P; HEUVEL, Willem-Jan Van~Den. Service-oriented design and
+  development methodology.
+\emph{International Journal of Web Engineering and Technology}, Inderscience,
+  v.~2, n.~4, p. 412--442, 2006.}
+
+\bibitem[Papazoglou e Heuvel 2006]{PapazoglouHeuvel:2006}
+\abntrefinfo{Papazoglou e Heuvel}{PAPAZOGLOU; HEUVEL}{2006b}
+{PAPAZOGLOU, Michael~P.; HEUVEL, Willem-Jan Van~Den. Service-oriented design
+  and development methodology.
+\emph{International Journal of Web Engineering and Technology}, Inderscience
+  Publishers, Geneva, Switzerland, v.~2, n.~4, p. 412--442, jul. 2006.
+ISSN 1476-1289.
+Dispon{\'\i}vel em:
+  \htmladdnormallink{$<$http:\-/\-/www\-.inderscience\-.com\-/offer\-.php?id=10423$>$}{http://www.inderscience.com/offer.php?id=10423}.}
+
+\bibitem[Papazoglou e Heuvel 2006]{Papazoglou:2006}
+\abntrefinfo{Papazoglou e Heuvel}{PAPAZOGLOU; HEUVEL}{2006c}
+{PAPAZOGLOU, Michael~P.; HEUVEL, Willem\&\#45;Jan Van~Den.
+  Service\&\#45;oriented design and development methodology.
+\emph{Int. J. Web Eng. Technol.}, Inderscience Publishers, Inderscience
+  Publishers, Geneva, SWITZERLAND, v.~2, n.~4, p. 412--442, jul. 2006.
+ISSN 1476-1289.
+Dispon{\'\i}vel em:
+  \htmladdnormallink{$<$http:\-/\-/dx\-.doi\-.org\-/10\-.1504\-/IJWET\-.2006\-.010423$>$}{http://dx.doi.org/10.1504/IJWET.2006.010423}.}
+
+\bibitem[Papazoglou \emph{et al.} 2006]{papazoglou_et_al:2006}
+\abntrefinfo{Papazoglou \emph{et al.}}{PAPAZOGLOU \emph{et al.}}{2006}
+{PAPAZOGLOU, Michael~P.; TRAVERSO, Paolo; DUSTDAR, Schahram; LEYMANN, Frank;
+  KR{\"A}MER, Bernd~J. 05462 service-oriented computing: A research roadmap.
+  In:  CUBERA, Francisco; KR{\"A}MER, Bernd~J.; PAPAZOGLOU, Michael~P. (Ed.).
+  \emph{Service Oriented Computing (SOC)}. Dagstuhl, Germany: Internationales
+  Begegnungs- und Forschungszentrum f{\"u}r Informatik (IBFI), Schloss
+  Dagstuhl, Germany, 2006.  (Dagstuhl Seminar Proceedings, 05462).
+ISSN 1862-4405. Dispon{\'\i}vel em:
+  \htmladdnormallink{$<$http:\-/\-/drops\-.dagstuhl\-.de\-/opus\-/volltexte\-/2006\-/524$>$}{http://drops.dagstuhl.de/opus/volltexte/2006/524}.}
+
+\bibitem[Papazoglou \emph{et al.} 2007]{papazoglouSOC:2007}
+\abntrefinfo{Papazoglou \emph{et al.}}{PAPAZOGLOU \emph{et al.}}{2007}
+{PAPAZOGLOU, Michael~P.; TRAVERSO, Paolo; DUSTDAR, Schahram; LEYMANN, Frank.
+  {Service-Oriented Computing: State of the Art and Research Challenges}.
+\emph{Computer}, IEEE Computer Society Press, Los Alamitos, CA, USA, v.~40,
+  n.~11, p. 38--45, nov. 2007.
+ISSN 0018-9162.
+Dispon{\'\i}vel em:
+  \htmladdnormallink{$<$http:\-/\-/dx\-.doi\-.org\-/10\-.1109\-/mc\-.2007\-.400$>$}{http://dx.doi.org/10.1109/mc.2007.400}.}
+
+\bibitem[Peltz 2003]{Peltz}
+\abntrefinfo{Peltz}{PELTZ}{2003}
+{PELTZ, C. Web services orchestration and choreography.
+\emph{Computer}, v.~36, n.~10, p. 46 -- 52, oct. 2003.
+ISSN 0018-9162.}
+
+\bibitem[Tsalgatidou e Pilioura 2002]{Tsalgatidou}
+\abntrefinfo{Tsalgatidou e Pilioura}{TSALGATIDOU; PILIOURA}{2002}
+{TSALGATIDOU, Aphrodite; PILIOURA, Thomi. An overview of standards and related
+  technology in web services.
+\emph{Distrib. Parallel Databases}, Kluwer Academic Publishers, Hingham, MA,
+  USA, v.~12, n.~2-3, p. 135--162, set. 2002.
+ISSN 0926-8782.
+Dispon{\'\i}vel em:
+  \htmladdnormallink{$<$http:\-/\-/dx\-.doi\-.org\-/10\-.1023\-/A:1016599017660$>$}{http://dx.doi.org/10.1023/A:1016599017660}.}
+
+\bibitem[Watson 2008]{watson}
+\abntrefinfo{Watson}{WATSON}{2008}
+{WATSON, Andrew. A brief history of mda.
+\emph{Upgrade, the European Journal for the Informatics Professional}, v.~9,
+  n.~2, p. 7--11, 2008.}
+
+\bibitem[Wesley 2002]{Wesley}
+\abntrefinfo{Wesley}{WESLEY}{2002}
+{WESLEY, Ajamu. \emph{WSFL in action, Part 1:When Web services cooperate.}
+  2002.
+Excerpted from 5th edition of the APA Publication Manual.
+Dispon{\'\i}vel em:
+  \htmladdnormallink{$<$http:\-/\-/www\-.ibm\-.com\-/developerworks\-/webservices\-/library\-/ws-wsfl1\-/$>$}{http://www.ibm.com/developerworks/webservices/library/ws-wsfl1/}.}
+
+\bibitem[Zhang e Jiang 2008]{Zhang:2008}
+\abntrefinfo{Zhang e Jiang}{ZHANG; JIANG}{2008}
+{ZHANG, Li; JIANG, Wei. Transforming business requirements into bpel: A
+  mda-based approach to web application development. In:  \emph{Semantic
+  Computing and Systems, 2008. WSCS '08. IEEE International Workshop on}.
+  [S.l.: s.n.], 2008. p. 61 --66.}
+
+\end{thebibliography}

@@ -1,0 +1,7 @@
+<flow standard-attributes>
+	standard-elements
+	<links>?
+		<link name="NCName">+
+	</links>
+	activity+
+</flow>

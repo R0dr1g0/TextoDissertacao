@@ -1,0 +1,24 @@
+<pick createInstance="yes|no"? standard-attributes>
+	standard-elements
+	<onMessage partnerLink="NCName"
+		portType="QName"?
+		operation="NCName"
+		variable="BPELVariableName"?
+		messageExchange="NCName"?>+
+		<correlations>?
+			<correlation set="NCName" initiate="yes|join|no"? />+
+		</correlations>
+		<fromParts>?
+			<fromPart part="NCName" toVariable="BPELVariableName" />+
+		</fromParts>
+			activity
+	</onMessage>
+	<onAlarm>*
+		(
+		<for expressionLanguage="anyURI"?>duration-expr</for>
+		|
+		<until expressionLanguage="anyURI"?>deadline-expr</until>
+		)
+		activity
+	</onAlarm>
+</pick>

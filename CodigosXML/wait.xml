@@ -1,0 +1,8 @@
+<wait standard-attributes>
+	standard-elements
+	(
+	<for expressionLanguage="anyURI"?>duration-expr</for>
+	|
+	<until expressionLanguage="anyURI"?>deadline-expr</until>
+	)
+</wait>

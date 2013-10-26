@@ -1,0 +1,5 @@
+<while standard-attributes>
+	standard-elements
+	<condition expressionLanguage="anyURI"?>bool-expr</condition>
+		activity
+</while>

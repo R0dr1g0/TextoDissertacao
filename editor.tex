@@ -1,0 +1,388 @@
+%%=====================================================================
+%\chapter{Ferramenta para modelagem \aladim}
+%\label{editor}
+%%=====================================================================
+%
+%Como já  dito, os elementos  da linguagem \aladim\ foram  definidos de
+%acordo  com  a  \se~\cite{deSouza:2005},  o  ciclo  de  design  usando
+%\aladim\ segue aquele  proposto por \citeonline{Sharp:etal:2007} e que
+%o desenvolvimento da ferramenta para modelagem empregou os padrões que
+%compõem  a  abordagem  \mda~\cite{OMG:MDA:2001}.   Dessa  forma,  este
+%capítulo apresenta o  {\em Editor \aladim} e descreve  como se deu seu
+%desenvolvimento.
+%
+%%=====================================================================
+%\section{Requisitos da ferramenta}
+%\label{aladimEditor}
+%%=====================================================================
+%
+%Como  visto na  seção~\ref{generalVision},  \aladim\ possui  elementos
+%diagramáticos  e  textuais.    Contudo,  independente  se  textual  ou
+%diagramático,  o suporte  ferramental para  auxiliar na  utilização de
+%determinada linguagem, sempre foi visto como um importante diferencial
+%para seus  usuários.  Seguindo esta perspectiva,  foi desenvolvida uma
+%ferramenta de suporte à linguagem, o {\em Editor \aladim}.  Para isso,
+%o  primeiro passo  foi especificar  um  conjunto de  requisitos que  a
+%ferramenta deveria atender.  Tais requisitos são listados a seguir:
+%
+%\begin{enumerate}
+% 
+% \item  {\em Permitir a  edição de  diagramas}: A  ferramenta deveria
+%    permitir ao designer a construção de modelos de maneira intuitiva,
+%    muito semelhante aos editores  gráficos mais comuns, empregado uma
+%    área de  edição e uma  paleta de elementos da  linguagem. Bastando
+%    arrastar os componentes do diagrama da paleta para área de edição.
+%
+%  \item  {\em  Suportar   uma  notação  processável}:  Considerando  a
+%    possibilidade de  um modelo  \aladim\ ser empregado  em processos,
+%    como a  geração automática de  interface, por exemplo.   Até mesmo
+%    para auxiliar no próximo requisito.
+%
+%  \item  {\em   Validar  sintaticamente  o   diagrama}:  As  vantagens
+%    esperadas   pelo   suporte   de   um   editor   gráfico,   estarão
+%    comprometidas, se  o designer tiver  um esforço muito  grande para
+%    checar visual e mentalmente se seu diagrama está correto. Assim, é
+%    imprescindível que a ferramenta garanta ao designer que o diagrama
+%    que ele está construindo esteja sintaticamente correto.
+%
+%\end{enumerate}
+%
+%Buscando   atender  aos   requisitos   estabelecidos,  optou-se   pelo
+%desenvolvimento  da   ferramenta  sob  a   forma  de  plugin   para  o
+%Eclipse\footnote{http://www.eclipse.org},  que  é  uma  plataforma  de
+%desenvolvimento  que  fornece uma  gama  de  serviços,  dentre eles  a
+%criação de  plugins que podem ser carregados,  integrados e executados
+%dentro do  próprio ambiente.   A plataforma, tecnologias  e atividades
+%desenvolvidas  para  criação do  Editor  \aladim\  são apresentados  a
+%seguir.
+%
+%%=====================================================================
+%\section{Tecnologias utilizadas}
+%\label{editorEclipse}
+%%=====================================================================
+%
+%A Fundação Eclipse possui vários projetos, onde são criadas e mantidas
+%várias  ferramentas  integradas. Dentre  os  vários  projetos, o  {\em
+%  Eclipse Modeling Project}\footnote{http://www.eclipse.org/modeling/}
+%tem  o foco  na evolução  e promoção  das técnicas  de desenvolvimento
+%baseado em  modelos, dentro da  comunidade de usuários  da plataforma.
+%Para isso, ele provê  um conjunto unificado de frameworks, ferramentas
+%e padrões de implementações~\cite{Steinberg:etal:2008}.
+%
+%O  \emf~({\em \Emf})~\cite{Budinsky:etal:2003}  é  a base  tecnológica
+%para o {\em projeto modeling}, ele oferece toda infraestrutura para se
+%metamodelar,  instanciar  e   manipular  modelos.   A  linguagem  para
+%definição de metamodelos no \emf\ é  chamada de {\em Ecore}, que é uma
+%implementação  para um subconjunto  do \mof.   O \emf\  possibilita ao
+%usuário  gerar, a partir  de algum  modelo Ecore,  código java  (sob a
+%forma de plugins  para a própria plataforma) que  irão possibilitar ao
+%usuário  a criação  e manipulação  de  modelos em  conformidade com  o
+%metamodelo  estabelecido,  possibilitando  inclusive  a  validação  do
+%mesmo.
+%
+%No  \emf\ não  há necessidade  de uma  metodologia específica  para se
+%definir o  metamodelo, pois, ele gera automaticamente  modelos Ecore a
+%partir de uma série de fontes como por exemplo, um diagrama \uml~({\em
+%  \Uml}), arquivos \xml~({\em \Xml})  e código java anotado.  Contudo,
+%o suporte para criação e  manipulação, oferecida é feito por no máximo
+%um  editor de  árvore,  onde  os elementos  do  modelo são  incluídos,
+%manipulados e removidos, sob a forma de nós filhos e irmão ao longo da
+%árvore.
+%
+%Já o \gef~({\em \Gef})~\cite{Majewski:2004} é um framework que permite
+%a criação de  editores gráficos na plataforma, através  de definição e
+%customização  dos  elementos que  irá  compor  o  diagrama, tais  como
+%figuras,  nós,  nós filhos,  arestas  e  compartimentos.  Os  editores
+%criados também são  incorporados à plataforma sob a  forma de plugins.
+%Contudo, o \gef\ oferece  suporte apenas à representação dos elementos
+%gráficos, deixando todo o controle do modelo por trás do diagrama, sob
+%o controle do usuário.  Durante  muito tempo isso foi feito através de
+%\pojo~({\em \Pojo}),  ou seja,  toda essa implementação  precisava ser
+%feita de maneira manual.
+%
+%É nesse contexto que  surge o \gmf~\cite{Plante:2006} para facilitar a
+%integração desses dois frameworks (\emf\ e \gef).  Assim é possível ao
+%usuário   desenvolver   um  completo   editor   gráfico,  através   da
+%especificação  de  quatro  modelos:   de  domínio,  de  definição  dos
+%elementos  gráficos,  de  definição  da  paleta de  ferramentas  e  de
+%mapeamento    entre   os   outros    modelos,   como    ilustrado   na
+%figura~\ref{fig:GMF:Workflow}.   O modelo  de  domínio corresponde  ao
+%metamodelo  que  será  usado  para  instanciar  os  modelos  que  irão
+%alimentar a visão ou diagrama  \gef, no caso da linguagem \aladim, seu
+%metamodelo será apresentado na seção~\ref{aladimMetamodel}, a seguir.
+%
+%\figura{Fluxo     de    atividades     do     \gmf,    extraído     de
+%  \citeonline{Plante:2006}.}
+%       {fig:GMF:Workflow}
+%       {gmf-workflow.eps}
+%       {0.500}
+%       {0}
+%
+%Dessa forma, para o desenvolvimento  do {\em Editor \aladim}, usando o
+%{\em Eclipse Modeling}, o principal  recurso usado foi \gmf\ que, como
+%visto,   é   responsável   por   prover  componentes   generativos   e
+%infraestrutura de tempo de execução para o desenvolvimento de editores
+%gráficos baseados  no \emf\  e usando o  \gef. Integrando todos  sob a
+%forma de plugins que podem ser integrados à própria plataforma.
+%
+%%=====================================================================
+%\section{Metamodelo da linguagem}
+%\label{aladimMetamodel}
+%%=====================================================================
+%
+%Entre  as seções  \ref{basicInteractions}  e \ref{transitions},  foram
+%apresentados, informalmente  (não processável), a  sintaxe e semântica
+%dos  elementos  da  linguagem   \aladim.   Agora,  nesta  seção,  será
+%apresentada o  metamodelo (processável) da  linguagem, especificando a
+%sintaxe  e semântica  de seus  elementos.  Considerando  os requisitos
+%estabelecidos  para  a  ferramenta  e  as  tecnologias  utilizadas,  o
+%metamodelo é  especificado usando um  modelo, que é a  linguagem usada
+%para  representar  modelos  no  \emf,  isto é,  metamodelos.   Como  a
+%linguagem de modelagem Ecore é  especificada no \emf, o Ecore se torna
+%um metamodelo de si mesmo~\cite{Budinsky:etal:2003}.
+%
+%Um modelo  Ecore pode ser  criado de várias  formas no \emf,  como por
+%exemplo, a importação de diagramas \uml, \xml\ e código java anotação.
+%A forma mais básica de manipulação  é através de um editor de árvores.
+%Adicionalmente  é  possível  manipular  um  modelo  Ecore  de  maneira
+%diagramática, sendo  que essa  forma foi utilizada  para a  criação do
+%metamodelo  da  linguagem  \aladim,  cuja  representação  é  feita  na
+%figura~\ref{fig:aladim:metamodel}.
+%
+%\figura{Metamodelo da linguagem \aladim.}
+%       {fig:aladim:metamodel}
+%       {aladim-metamodel.eps}
+%       {0.750}
+%       {0}
+%
+%Um {\em modelo de interação} é composto por dois conjuntos, um de {\em
+%  elementos}  e  outro das  {\em  transições}  entre esses  elementos.
+%Dessa  forma,  são necessários  pelo  menos  dois  elementos para  uma
+%transição.  Um elemento é uma abstração para {\em função da aplicação}
+%e  {\em  espaços},  que  é   outra  abstração  para  {\em  espaços  de
+%  interação}, {\em pontos iniciais} e  {\em finais} para a interação e
+%{\em espaços de interação referenciados} e {\em aplicações externas}.
+%
+%Um espaço de interação é composto por, pelo menos, uma {\em interação}
+%que é uma abstração para {\em interações básicas} e {\em operadores de
+%  interação}.  Os  operadores podem conter novas interações,  o que os
+%tornam recursivos. Um  operador é uma abstração para  {\em join}, {\em
+%  sequence}, {\em choose}, {\em  repeat} e {\em combine}.  Assim, como
+%uma interação básica  é uma abstração para {\em  select}, {\em enter},
+%{\em perceive} e {\em activate}.
+%
+%Uma transição é  uma abstração para {\em ação},  {\em navegação}, {\em
+%  reação de sucesso}, {\em reação  de falha} e {\em sincronização}. As
+%transições, quando  disparadas pelo usuário, devem  identificar o nome
+%da informação  associada a interação  básica que disparou.   Já quando
+%disparadas  pelas  funções  da  aplicação,  podem  levar  aos  espaços
+%informações  sobre  resultados   ou  falhas  no  processamento.   Toda
+%transição possui uma origem e um destino.
+%
+%O \emf\ oferece  suporte para a geração automática  de código capaz de
+%editar  e  validar  um  modelo  de acordo  com  as  especificações  do
+%metamodelo. A validação consiste, dentre outras coisas, na verificação
+%de todas  as associações  estabelecidas no metamodelo,  incluindo suas
+%cardinalidades.    Contudo,  algumas  situações   em  que   apenas  as
+%associações, especializações e  cardinalidades não são suficiente para
+%especificar   determinadas  restrições,  é   possível  fazer   uso  de
+%\ocl~({\em  \Ocl}), que é  uma linguagem  formal usada  para descrever
+%expressões em modelos~\cite{OMG:OCL:2012}.
+%
+%Como visto  na descrição das  transições (seção~\ref{transitions}), os
+%diferentes  tipos de  transições têm  algumas  restrições específicas.
+%Além  disso, o  metamodelo  da figura~\ref{fig:aladim:metamodel},  não
+%especifica isso.  Dessa  forma, considerando que de acordo  com o tipo
+%de transição,  as origens e  destinos devem ser de  tipos específicos,
+%por  exemplo,  em uma  {\em  ação}  a origem  deve  ser  um espaço  de
+%interação e  o destino uma  função da aplicação, essas  restrições são
+%especificas   através  de  invariantes   definidos  nas   classes  que
+%especializam as abstrações, usando  \ocl, que também são traduzidos em
+%código  para validação  durante  a modelagem  usando  o editor.   Este
+%invariantes são descritos a seguir:
+%
+%\begin{itemize}
+%
+%  \item {\em  Action}: Especialização de transição que  liga um espaço
+%    de interação a uma função da aplicação:
+%
+%    \begin{itemize}
+%
+%      \item {\em  not self.source.oclIsTypeOf(ApplicationFunction)}: A
+%        origem de uma ação não pode ser uma função da aplicação;
+%
+%      \item   {\em   self.target.oclIsTypeOf(ApplicationFunction)}:  O
+%        destino uma ação deve ser uma função da aplicação;
+%
+%      \item   {\em  self.source.oclIsTypeOf(InteractionSpace)\\implies
+%        self.source.oclAsType(InteractionSpace).getNestedBasicInteractions()\\->exists(i:
+%        BasicInteraction  | i.information  = self.information)}:  Se a
+%        origem de  uma ação for  um espaço de interação,  deve existir
+%        uma interação básica em  seu interior responsável por disparar
+%        a transição;
+%
+%    \end{itemize}
+%
+%  \item  {\em  Reaction}: Especialização  de  transição  que liga  uma
+%    função da aplicação a um espaço de interação:
+%
+%    \begin{itemize}
+%
+%      \item   {\em   self.source.oclIsTypeOf(ApplicationFunction)}:  A
+%        origem de uma reação deve ser uma função da aplicação;
+%
+%      \item {\em  not self.target.oclIsTypeOf(ApplicationFunction)}: O
+%        destino de uma reação não pode ser uma função da aplicação;
+%
+%    \end{itemize}
+%
+%  \item  {\em Navigation}:  Especialização de  transição que  liga uma
+%    função da aplicação a um espaço de interação:
+%
+%    \begin{itemize}
+%
+%      \item {\em  not self.source.oclIsTypeOf(ApplicationFunction)}: A
+%        origem de uma navegação não pode ser uma função da aplicação;
+%
+%      \item {\em  not self.target.oclIsTypeOf(ApplicationFunction)}: O
+%        destino de uma navegação não pode ser uma função da aplicação;
+%
+%      \item   {\em  self.source.oclIsTypeOf(InteractionSpace)\\implies
+%        self.source.oclAsType(InteractionSpace).getNestedBasicInteractions()\\->exists(i:
+%        BasicInteraction  | i.information  = self.information)}:  Se a
+%        origem  de uma  navegação  for um  espaço  de interação,  deve
+%        existir uma  interação básica em seu  interior responsável por
+%        disparar a transição;
+%
+%    \end{itemize}
+%
+%  \item {\em Synchronization}: Especialização de transição que liga um
+%    espaço de interação a uma função da aplicação:
+%
+%    \begin{itemize}
+%
+%      \item {\em  not self.source.oclIsTypeOf(ApplicationFunction)}: A
+%        origem  de  uma  sincronização  não  pode ser  uma  função  da
+%        aplicação;
+%
+%      \item   {\em   self.target.oclIsTypeOf(ApplicationFunction)}:  O
+%        destino de uma sincronização deve ser uma função da aplicação;
+%
+%    \end{itemize}
+%
+%\end{itemize}
+%
+%Os resultados do processo de validação de um modelo \aladim, podem ser
+%observados   na   figura~\ref{fig:aladim:editor},   através   de   uma
+%janela/painel    específico    para    apresentação   dos    problemas
+%ocorridos. Além disso,  os elementos do diagrama são  decorados com os
+%indicadores desses problemas. No  caso apresentado na figura, os erros
+%decorrem justamente pela  violação de algumas restrições especificadas
+%nos {\em invariantes} descritos acima.
+%
+%%=====================================================================
+%\section{Editor \aladim\ em execução}
+%\label{editorRunning}
+%%=====================================================================
+%
+%Como resultado,  de tudo que  foi descrito nas seções  anteriores, foi
+%produzido o {\em Editor \aladim} que pode ser visualizado, em execução
+%sob a  forma de  um plugin já  completamente integrado ao  Eclipse, na
+%figura~\ref{fig:aladim:editor},  onde  os  componentes  principais  do
+%editor,  distribuídos  sob a  forma  janelas  ou  painéis do  ambiente
+%Eclipse, são descritos a seguir.
+%
+%A  primeira,  mais  à esquerda,  é  a  janela  do {\em  explorador  de
+%  pacotes}, onde  ficam os projetos que empacotam  os diagramas.  Cada
+%projeto é armazenado no sistema de arquivo sob a forma de uma pasta ou
+%diretório. Já  os diagramas  são armazenados sob  a forma  de arquivo,
+%sendo dois para cada diagrama.   Um arquivo ({\tt .aladim}) armazena o
+%\xml\ do  modelo, isto  é as instâncias  dos elementos  do metamodelo,
+%implementados usando o  \emf.  Outro arquivo ({\tt .aladim\_diagram}),
+%armazena o \xml\ do diagrama,  isto é, os elementos visuais associados
+%aos elementos do modelo, implementados usando o \gef.
+%
+%A  segunda janela, posicionada  ao centro,  é a  {\em área  de edição}
+%propriamente  dita,  é nela  que  o  designer  desenha seus  diagramas
+%\aladim.  Para  cada elemento  visual presente no  diagrama, desenhado
+%através do \gef, o ambiente,  através do \gmf, persiste um elemento no
+%modelo, com  auxilio do \emf.   As operações relacionadas  à aparência
+%dos  elementos visuais  (cor, fonte,  posição, etc.)   são persistidas
+%apenas  no  diagrama   (arquivo  .aladim\_diagram),  enquanto  que  as
+%operações   conceituais,  como  adição   e/ou  remoção,   mudanças  de
+%propriedades e  referências dos  elementos, são persistidas  no modelo
+%(arquivo .aladim), sendo que o sincronismo entre esses dois arquivos é
+%completamente garantido pelo \gmf.
+%
+%Na  janela  mais  à  direita  fica  a {\em  paleta}  de  elementos  da
+%linguagem. No  estilo {\em drag-and-drop}, o  designer deve selecionar
+%cada  elemento e  adicioná-los  ao diagrama,  sendo  editar na  região
+%central. Os elementos da paleta estão organizados em cinco categorias,
+%que se comprimem e se  expandem para apresentação dos elementos. Essas
+%categorias são:
+%
+%\begin{itemize}
+%
+%  \item  {\em Geral}: Permite  adicionar os  elementos mais  gerais da
+%    linguagem, como  espaço de interação  ou função da  aplicação, por
+%    exemplo.
+%
+%  \item {\em  Operador}: Permite adicionar, a um  espaço de interação,
+%    os operadores como junção ou escolha, por exemplo.
+%
+%  \item {\em Interação}: Permite adicionar as interações básicas, como
+%    entre com uma informação ou selecione uma informação, por exemplo.
+%
+%  \item {\em Transição}: Permite  adicionar as transições, com ação ou
+%    navegação, entre os elementos gerais da linguagem.
+%
+%\end{itemize}
+%
+%Na parte inferior ficam várias janelas, entre elas a de edição de {\em
+%  propriedades}  para elementos  selecionados no  modelo e  a  de {\em
+%  problemas}  encontrados  no  modelo  que  decorrem  do  processo  de
+%validação      do     mesmo.       No     caso      apresentado     na
+%figura~\ref{fig:aladim:editor},  são  apresentados  quatro  problemas,
+%propositalmente deixados no modelo.   Observe que além da listagem dos
+%problemas com a indicação do  tipo de problema e sua localização, eles
+%também são assinalados no diagrama através de decoração adicionados ao
+%componente visual corresponde  ao elemento do modelo, que  ao passar o
+%mouse sobre ele irá informar o tipo de problema ocorrido.
+%
+%\figura{Editor \aladim\ em execução integrado ao Eclipse.}
+%       {fig:aladim:editor}
+%       {aladim-editor.eps}
+%       {0.555}
+%       {-90}
+%
+%%=====================================================================
+%\section{Considerações sobre o capítulo}
+%\label{editorSynthesis}
+%%=====================================================================
+%
+%Este  capítulo  apresentou  o  {\em Editor  \aladim},  uma  ferramenta
+%desenvolvida  para permitir  a construção  de  diagramas representando
+%modelos  nessa  linguagem. Seu  objetivo  é  auxiliar  no processo  de
+%comunicação   do  designer  com   os  demais   membro  da   equipe  de
+%desenvolvimento, especialmente os desenvolvedores.
+%
+%Desenvolvido  usando a  abordagem  \mda\ e  concretizado como  plugins
+%integrados ao Eclipse, a  ferramenta permite usar todas as facilidades
+%oferecidas pela plataforma.  Além  disso, dentro da abordagem \mda, os
+%modelos \aladim\  estão num  nível \pim\ de  abstração, o  que permite
+%que, usando  o metamodelo de \aladim, possam  ser produzidos processos
+%automáticos  para  os  demais  níveis.  Possibilitando,  inclusive,  a
+%geração automática de código da interface para diversas plataformas.
+%
+%Tudo   isso  demonstra   que  a   ferramenta  atende   aos  requisitos
+%(seção~\ref{aladimEditor}) para os quais ela foi desenvolvida. Além da
+%edição,  no  estilo  {\em  drag-and-drop}, dos  diagramas  \aladim,  a
+%ferramenta  também possui  um editor  independente, que  possibilita a
+%edição do modelo como uma  árvore. Sendo que a ferramenta mantém esses
+%dois   arquivos  sincronizados   e  quaisquer   alterações  em   um  é
+%automaticamente refletida no outro.
+%
+%%%% Local Variables: 
+%%%% mode: latex
+%%%% TeX-master: "main"
+%%%% End: 

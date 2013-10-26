@@ -1,0 +1,14 @@
+<reply partnerLink="NCName"
+	portType="QName"? operation="NCName"
+	variable="BPELVariableName"?
+	faultName="QName"?
+	messageExchange="NCName"?
+	standard-attributes>
+	standard-elements
+	<correlations>?
+		<correlation set="NCName" initiate="yes|join|no"? />+
+	</correlations>
+	<toParts>?
+		<toPart part="NCName" fromVariable="BPELVariableName" />+ 
+	</toParts>
+</reply>

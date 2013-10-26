@@ -1,0 +1,12 @@
+<if standard-attributes>
+	standard-elements
+	<condition expressionLanguage="anyURI"?>bool-expr</condition>
+		activity
+	<elseif>*
+	<condition expressionLanguage="anyURI"?>bool-expr</condition>
+		activity
+	</elseif>
+	<else>?
+		activity
+	</else>
+</if>

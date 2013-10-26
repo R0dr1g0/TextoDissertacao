@@ -1,0 +1,17 @@
+def policy policy01{ 
+	isAppliedTo: hotelLookup; 
+	requires: searchHotel@in != null 
+	(onFailureDo hotelInformation); // alternative hotel search engine 
+	ensures: searchHotel@out.Length > 0; 
+	timeConstraint : meet(selectHotel, viewDetails); 
+} 
+ 
+def policy policy02{ 
+	isAppliedTo: payAndGetVoucher; 
+	requires: payment@in == setDataPayment@in && payment@in > 0 
+	&& req(payment).val <= 3 
+	(onFailureDo abortOperation); 
+	ensures: payment@out == true && getVoucherNumber@out != null 
+	(onFailureDo throw PaymentException); 
+	timeConstraint : overlap(payment, getVoucherNumber); 
+}

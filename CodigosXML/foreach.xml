@@ -1,0 +1,17 @@
+<forEach counterName="BPELVariableName" parallel="yes|no"
+	standard-attributes>
+	standard-elements
+	<startCounterValue expressionLanguage="anyURI"?>
+		unsigned-integer-expression
+	</startCounterValue>
+	<finalCounterValue expressionLanguage="anyURI"?>
+		unsigned-integer-expression
+	</finalCounterValue>
+	<completionCondition>?
+		<branches expressionLanguage="anyURI"?
+			successfulBranchesOnly="yes|no"?>?
+			unsigned-integer-expression
+		branches>
+	</completionCondition>
+	<scope ...>...</scope>
+</forEach>

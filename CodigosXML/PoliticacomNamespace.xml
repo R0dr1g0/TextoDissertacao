@@ -1,0 +1,5 @@
+<wsp:Policy
+        Name="http://www.example.com/policies/P1"
+        xmlns:wsp="http://www.w3.org/ns/ws-policy" >
+		<!-- Details omitted for readability -->
+ </wsp:Policy>

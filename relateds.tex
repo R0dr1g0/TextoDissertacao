@@ -1,0 +1,48 @@
+%%=====================================================================
+\chapter{Trabalhos relacionados}
+\label{relatedWorks}
+%%=====================================================================
+
+Neste capítulo apresentamos uma descrição geral dos trabalhos relacionados com a pesquisa, além de promover comparações entre as abordagens correlatas e a abordagem proposta por nós.
+
+%%=====================================================================
+\section{\textit{Transforming Business Requirements into BPEL: a MDA-Based Approach to Web Application Development}}
+%\label{rw-interaction-modeling}
+%%=====================================================================
+
+O trabalho produzido por \cite{Zhang:2008}, propõe uma abordagem baseada em MDA para modelar requisitos funcionais (RF) de processos de negócios, promovendo a flexibilidade da arquitetura de negócios a requisitos mutáveis. A abordagem utiliza o VIP-\textit{framework} para auxiliar a modelagem dos níveis de abstração CIM e PIM intrínsecos ao MDA. 
+
+A abordagem inicia dividindo o modelo CIM em dois níveis conceituais. Em um nível superior o modelo BVM-GAV ( \textit{Global Actor Viewpoint}), é construído sobre os valores ao qual a organização lucra ou aumenta sua utilidade econômica. Em um nível inferior, dois modelos são propostos para expressar a lógica de negócio atual, o BIM e o BPM. O BIM-SV (\textit{System Viewpoint}) é responsável por expressar as trocas de informações entre as entidades que circunscreve o sistema, mais tarde este modelo é estendido para descrever maiores detalhes sobre as informações e seus relacionamentos especializando o BIM-SV para o BIM-OV (\textit{Organization Viewpoint}). O BPM-BV (\textit{Business Viewpoint}) é responsável por expressar o fluxo de controle do processo de negócio, mais tarde este modelo é estendido para expressar a rastreabilidade e consistência do modelo de negócios especializando o BPM-BV (\textit{Business Viewpoint}) para o BPM-SV (\textit{Sistem Viewpoint}). 
+
+Como modelo PIM a abordagem utiliza o metamodelo BPEL, pois, ele promove uma solução flexível para descrever a arquitetura de aplicações orientadas a serviços, oferecendo um refinamento do modelo de negócio através da orquestração de serviços.
+
+%%=====================================================================
+\section{\textit{Towards a Service-Oriented MDA-Based Approach to the Aalignment of Business Processes With it Systems: From The Business Model to a Web Service Compositon Model}}
+%\label{rw-models-inspection}
+%%=====================================================================
+
+Este trabalho apresenta uma abordagem para desenvolvimento de Sistemas baseados em serviços, chamada SOD-M (\textit{Service Oriented Development Method}), esta metodologia é integrada ao \textit{framework} MDA (\textit{Model Driven Architecture}). O método SOD-M define um processo guiado por modelos que inicia a modelagem do ambiente de negócio partindo do alto nível de abstração obtendo um design de composição de serviços. 
+
+O método tem como característica fazer uso de serviços identificados na modelagem de alto nível de processos como elementos para a construção de aplicações. O método SOD-M usa a técnica de elicitação de requisitos chamada e3value como uma abordagem de modelagem de negócios, ao qual nos permite compreender o ambiente de negócios ao qual a aplicação será usado, além de identificar os serviços que serão oferecidos pelo sistema para satisfazer as necessidades dos clientes.
+ 
+SOD-M também modela o comportamento das aplicações baseadas em serviços, incluindo a modelagem de novos elementos para que seja possível representar o processo de negócio e como eles serão providos por meio da composição de \textit{Web Services} (WS). Assim, é possível explicitar como o design da composição de \textit{Web Services} pode ser derivado da modelagem de alto nível de negócio.
+
+O trabalho realizado por \cite{Placido} é uma extensão da metodologia SOD-M para a construção de composições de serviços e suas restrições não funcionais associadas, esta extensão denomina-se $\pi$-SOD-M. Nossa proposta é um complemento a extensão feita por \cite{Placido}. Onde propomos a extensão do número de PSM's, gerando um modelo voltado para a plataforma especifica WS-BPEL.
+
+%
+%%=====================================================================
+\section{\textit{A Methodology for Building Reliable Service-Based Applications}}
+%\label{relatesSynthesis}
+%%=====================================================================
+
+$\pi$-SOD-M (\textit{Policy-based Service Oriented Development Methodology}), é uma metodologia para a modelagem de aplicações orientadas a serviços a qual usa Políticas de qualidade. O trabalho propõe um método orientado a modelos para desenvolvimento de aplicações confiáveis. 
+
+$\pi$-SOD-M consiste de: (i) um conjunto de meta-modelos para representação de requisitos não-funcionais associados a serviços em diferentes níveis de modelagem, a partir de um modelo de caso de uso até um modelo de composição de serviço, (ii) um meta-modelo de plataforma específica que representa a especificação das composições e as políticas, (iii) regras de transformação de modelo para modelo e de modelo para texto para semi-automatizar a implementação de composições de serviços, e (iv) um ambiente que implementa estes meta-modelos e regras. 
+
+Nossa proposta complementa este trabalho aumentando o número de PSM's da metodologia $\pi$-SOD-M. Este aumento se dá através da geração de um meta-modelo de plataforma específica capaz de representar composições de serviços voltada para a linguagem de orquestração de serviços WS-BPEL. Propomos também regras de transformação de modelo para modelo e de modelo para texto para semi-automatizar a implementação de código de maquina das composições de serviços.
+
+
+%%%% Local Variables: 
+%%%% mode: latex
+%%%% TeX-master: "main"
+%%%% End: 

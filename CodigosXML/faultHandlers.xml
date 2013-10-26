@@ -1,0 +1,10 @@
+<faultHandlers>
+	<catch faultName="QName"
+	faultVariable="BPELVariableName">
+	...
+	<catch>
+		<catchAll>
+		...
+		</catchAll>
+	</catch>
+</faultHandlers>

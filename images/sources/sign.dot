@@ -1,0 +1,21 @@
+digraph G {
+
+	ratio = "fill";
+	size = "6,2.5"
+
+	referent [shape = ellipse label = "referente"]; 
+	meaning [shape = ellipse  label = "significado"];
+	representation [shape = ellipse  label = "representação"];
+ 	SIGN [shape = invtriangle style=filled,bold fillcolor=wheat label = "signo"]; 
+
+
+	meaning -> referent [dir = none];
+	meaning -> SIGN;
+	meaning -> representation [dir = none];
+
+	SIGN -> referent [dir = back];
+	SIGN -> representation [dir = back];
+	referent -> representation [dir = none style=dotted constraint = false];
+
+}
+

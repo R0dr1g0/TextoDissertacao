@@ -1,0 +1,716 @@
+<!-- O atributo queryLanguage define a linguagem utilizada pelo processo para a seleção e atribuição de nós,o valor default para este atributo do processo é o definido abaixo, onde representa o uso da [XPath 1.0] dentro do WS-BPEL 2.0. -->
+<!-- O atributo expressionLanguage define a linguagem de expressão do processo, o valor default deste atributo é o definido a baixo, onde representa o uso da [XPath 1.0] dentro do WS-BPEL 2.0.-->
+<!-- O valor default deste atributo é no-->
+<!-- Este atributo habilita o uso das falhas no processo e não permite que o processo seja finalizado, ou seja, habilita o uso dos faulthadlers, seu velor default é o no-->
+
+<process name="HotelReservation" targetNamespace="http://www.dimap.ufrn.br/process/hotelReservation" 
+		 queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0"? 
+		 expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0"?  
+		 suppressJoinFailure="no"? 
+		 exitOnStandardFault="no"? 
+		 xmlns="http://www.dimap.ufrn.br/process/hotelReservation/executable">
+        	
+   <extensions>? 
+      <extension namespace="anyURI" mustUnderstand="yes|no" />+ <!-- Aqui podemos definir extenções da linguagem WS-BPEL 2.0 -->
+   </extensions>
+   
+   <!-- Importação de tipos da interface WSDL-->
+   <import namespace="anyURI"?  
+      location="anyURI"?  			
+      importType="anyURI" />* 
+   
+   <partnerLinks>? 
+      <!-- Note: At least one role must be specified. -->
+	  
+	  <!-- Tipo de patnerLinkType cliente ou provedor ?????-->
+		<partnerLink name="MapsService" 
+			partnerLinkType="Provedor" 
+			myRole="BuscarMapDeUmaLocalidade"?  
+			partnerRole="InvocarProvedorServiçoMapa"? 
+			initializePartnerRole="yes"?>+ 
+		</partnerLink> 
+		
+		<!-- Tipo de patnerLinkType cliente ou provedor ?????-->
+		<partnerLink name="HotelInformationService" 
+			partnerLinkType="Provedor" 
+			myRole="RetornaInformaçoesDoHotel"?  
+			partnerRole="InvocarProvedorServiçoHotel"? 
+			initializePartnerRole="yes"?>+ 
+		</partnerLink>
+		
+		<!-- Tipo de patnerLinkType cliente ou provedor ?????-->
+		<partnerLink name="CarRentalService" 
+			partnerLinkType="Provedor" 
+			myRole="RetornarInformaçoesAluguelDoCarro"
+			partnerRole="InvocarProvedorServiçoAluguelCarro"? 
+			initializePartnerRole="yes"?>+ 
+		</partnerLink>
+		
+		<!-- Tipo de patnerLinkType cliente ou provedor ?????-->
+		<partnerLink name="Entertainment" 
+			partnerLinkType="Provedor"
+			myRole="RetornarInformaçoesDeEntreterimento"?  
+			partnerRole="InvocarProvedorServiçoEntreterimento"? 
+			initializePartnerRole="yes"?>+ 
+		</partnerLink>
+		
+		<!-- Tipo de patnerLinkType cliente ou provedor ?????-->
+		<partnerLink name="BankService" 
+			partnerLinkType="Provedor"
+			myRole="RetornarInformaçoesDoServiçoPagamento"?  
+			partnerRole="InvocarProvedorServiçoPagamento"? 
+			initializePartnerRole="yes"?>+ 
+		</partnerLink>
+		
+		<partnerLink name="ClienteHotelReservation" 
+			partnerLinkType="Cliente"
+			myRole="BuscarInformaçoesReservasDeHoteis"?  
+			partnerRole="InvocarServiçoDeHoteis"? 
+			initializePartnerRole="yes"?>+ 
+		</partnerLink>
+		
+		<partnerLink name="NCName" 
+			partnerLinkType="QName"
+			myRole="NCName"?  
+			partnerRole="NCName"? 
+			initializePartnerRole="yes|no"?>+ 
+		</partnerLink>
+		
+   </partnerLinks>
+  <!-- Não sei que tipo de mensagens iremos precisar-->
+  <messageExchanges>? 
+      <messageExchange name="NCName" />+ 
+   </messageExchanges>
+  <!-- Não sei que variáveis serão nescessárias-->
+  <variables>? 
+      <variable name="ConfirmacaoHotelEncontrado" 
+         messageType="Confirmaçao"? 
+         type="boolean"?  
+         element="QName"?>+ <!-- Nome do elemento WSDL que representa a variável na descrção WSDL -->
+         from-spec? 
+      </variable>
+   </variables>
+   
+   <!-- Correlacionar os tipos de mensagens efetuadas entre as trocas de mensagens no processo. -->
+   <correlationSets>? 
+      <correlationSet name="NCName" properties="QName-list" />+ 
+   </correlationSets>
+   
+   <faultHandlers>? 
+      <!-- Note: There must be at least one faultHandler -->
+<catch faultName="QName"?  
+         faultVariable="BPELVariableName"? 
+         ( faultMessageType="QName" | faultElement="QName" )? >*  
+         activity 
+      </catch>
+      <catchAll>?  
+         activity 
+      </catchAll>
+   </faultHandlers>
+   <eventHandlers>? 
+      
+	  <!-- Note: There must be at least one onEvent or onAlarm. -->
+<onEvent partnerLink="NCName" 
+         portType="QName"? 
+         operation="NCName" 
+         ( messageType="QName" | element="QName" )? 
+         variable="BPELVariableName"?  
+         messageExchange="NCName"?>* 
+         <correlations>? 
+            <correlation set="NCName" initiate="yes|join|no"? />+ 
+         </correlations>
+         <fromParts>? 
+            <fromPart part="NCName" toVariable="BPELVariableName" />+ 
+         </fromParts>
+         <scope ...>...</scope>
+      </onEvent>
+      <onAlarm>* 
+         <!-- Note: There must be at least one expression. -->
+         ( <for expressionLanguage="anyURI"?>duration-expr</for> | <until expressionLanguage="anyURI"?>deadline-expr</until>)? 
+         <repeatEvery expressionLanguage="anyURI"?>
+            duration-expr
+			</repeatEvery>? 
+         <scope ...>...</scope>
+      </onAlarm>
+   </eventHandlers>
+   activity 
+   
+   <sequence name="principal">
+	<scope>
+		
+		<while>
+			<condition>ConfirmacaoHotelEncontrado == !TRUE</condition> <!-- Condição não esta correta -->
+			<scope>
+				<!-- Invocando a operação searche hotel -->
+				<sequence name="operaçõesDoHotel">			
+					<scope>
+							<invoke partnerLink="HotelInformationService" 
+									portType="portType/searchHotel"?  
+									operation="BuscarHoteis"
+									inputVariable="nomeDoHotel"?  
+									outputVariable="achou?"? 
+									standard-attributes>
+		
+									standard-elements 
+
+								<correlations>? 
+								
+								<correlation set="NCName" initiate="yes|join|no"? 
+											 pattern="request|response|request-response"? />+ 
+
+								</correlations>
+
+							<catch faultName="QName"?  
+								   faultVariable="BPELVariableName"? 
+								   faultMessageType="QName"?  
+								   faultElement="QName"?>*  
+
+								activity 
+
+							</catch>
+
+								<catchAll>? 
+
+									activity 
+
+								</catchAll>
+
+							<compensationHandler>?  
+
+								activity 
+
+							</compensationHandler>
+
+								<toParts>? 
+
+								<toPart part="NCName" fromVariable="BPELVariableName" />+ 
+
+								</toParts>
+
+								<fromParts>? 
+
+								<fromPart part="NCName" toVariable="BPELVariableName" />+ 
+							</fromParts>
+						</invoke>
+						
+					<!-- Invocando a operação celect hotel -->
+						<invoke partnerLink="HotelInformationService" 
+									portType="portType/selectHotel"?  
+									operation="SelecionarHotel"
+									inputVariable="nomeDoHotel"?  
+									outputVariable="IDhotel"? 
+									standard-attributes>
+		
+									standard-elements 
+
+								<correlations>? 
+								
+								<correlation set="NCName" initiate="yes|join|no"? 
+											 pattern="request|response|request-response"? />+ 
+
+								</correlations>
+
+							<catch faultName="QName"?  
+								   faultVariable="BPELVariableName"? 
+								   faultMessageType="QName"?  
+								   faultElement="QName"?>*  
+
+								activity 
+
+							</catch>
+
+								<catchAll>? 
+
+									activity 
+
+								</catchAll>
+
+							<compensationHandler>?  
+
+								activity 
+
+							</compensationHandler>
+
+								<toParts>? 
+
+								<toPart part="NCName" fromVariable="BPELVariableName" />+ 
+
+								</toParts>
+
+								<fromParts>? 
+
+								<fromPart part="NCName" toVariable="BPELVariableName" />+ 
+							</fromParts>
+						</invoke>
+						
+						<!-- Invocando a operação mostrar detalhes do hotel -->
+						<invoke partnerLink="HotelInformationService" 
+									portType="portType/hotelInformation"?  
+									operation="HotelDetails"
+									inputVariable=""?  
+									outputVariable="IDhotel"? 
+									standard-attributes>
+		
+									standard-elements 
+
+								<correlations>? 
+								
+								<correlation set="NCName" initiate="yes|join|no"? 
+											 pattern="request|response|request-response"? />+ 
+
+								</correlations>
+
+							<catch faultName="QName"?  
+								   faultVariable="BPELVariableName"? 
+								   faultMessageType="QName"?  
+								   faultElement="QName"?>*  
+
+								activity 
+
+							</catch>
+
+								<catchAll>? 
+
+									activity 
+
+								</catchAll>
+
+							<compensationHandler>?  
+
+								activity 
+
+							</compensationHandler>
+
+								<toParts>? 
+
+								<toPart part="NCName" fromVariable="BPELVariableName" />+ 
+
+								</toParts>
+
+								<fromParts>? 
+
+								<fromPart part="NCName" toVariable="BPELVariableName" />+ 
+							</fromParts>
+						</invoke>
+						
+					</scope>
+					
+					<!-- Invocando a operação mostrar detalhes do hotel -->
+						<invoke partnerLink="HotelReservation" 
+									portType="portType/reservationRoom"?  
+									operation="ReservarHotel"
+									inputVariable=" IDHotel"?  
+									outputVariable="IDhotel"? 
+									standard-attributes>
+		
+									standard-elements 
+
+								<correlations>? 
+								
+								<correlation set="NCName" initiate="yes|join|no"? 
+											 pattern="request|response|request-response"? />+ 
+
+								</correlations>
+
+							<catch faultName="QName"?  
+								   faultVariable="BPELVariableName"? 
+								   faultMessageType="QName"?  
+								   faultElement="QName"?>*  
+
+								activity 
+
+							</catch>
+
+								<catchAll>? 
+
+									activity 
+
+								</catchAll>
+
+							<compensationHandler>?  
+
+								activity 
+
+							</compensationHandler>
+
+								<toParts>? 
+
+								<toPart part="NCName" fromVariable="BPELVariableName" />+ 
+
+								</toParts>
+
+								<fromParts>? 
+
+								<fromPart part="NCName" toVariable="BPELVariableName" />+ 
+							</fromParts>
+						</invoke>
+					
+				</sequence>
+				
+				<if xmlns:inventory="http://www.dimap.ufrn.br/process/executable"
+					xmlns:FLT="http://example.com/faults">
+
+					<condition> adicionarPacoteDeEntreterimento == TRUE </condition> <!-- Acondição não esta correta -->
+
+					<flow> 
+						<!-- perform fulfillment work --> 
+						
+						<!-- Invocando a operação informação sobre intreterimento -->
+						<invoke partnerLink="HotelReservation" 
+									portType="portType/entertainmentsView"?  
+									operation="InformaçãoIntreterimento"
+									inputVariable="nomeIntreterimento"?  
+									outputVariable="IDintreterimento"? 
+									standard-attributes>
+		
+									standard-elements 
+
+								<correlations>? 
+								
+								<correlation set="NCName" initiate="yes|join|no"? 
+											 pattern="request|response|request-response"? />+ 
+
+								</correlations>
+
+							<catch faultName="QName"?  
+								   faultVariable="BPELVariableName"? 
+								   faultMessageType="QName"?  
+								   faultElement="QName"?>*  
+
+								activity 
+
+							</catch>
+
+								<catchAll>? 
+
+									activity 
+
+								</catchAll>
+
+							<compensationHandler>?  
+
+								activity 
+
+							</compensationHandler>
+
+								<toParts>? 
+
+								<toPart part="NCName" fromVariable="BPELVariableName" />+ 
+
+								</toParts>
+
+								<fromParts>? 
+
+								<fromPart part="NCName" toVariable="BPELVariableName" />+ 
+							</fromParts>
+						</invoke>
+						
+						<!-- Invocando a operação informação sobre intreterimento -->
+						<invoke partnerLink="HotelReservation" 
+									portType="portType/entertainmentsView"?  
+									operation="InformaçãoIntreterimento"
+									inputVariable="nomeIntreterimento"?  
+									outputVariable="IDintreterimento"? 
+									standard-attributes>
+		
+									standard-elements 
+
+								<correlations>? 
+								
+								<correlation set="NCName" initiate="yes|join|no"? 
+											 pattern="request|response|request-response"? />+ 
+
+								</correlations>
+
+							<catch faultName="QName"?  
+								   faultVariable="BPELVariableName"? 
+								   faultMessageType="QName"?  
+								   faultElement="QName"?>*  
+
+								activity 
+
+							</catch>
+
+								<catchAll>? 
+
+									activity 
+
+								</catchAll>
+
+							<compensationHandler>?  
+
+								activity 
+
+							</compensationHandler>
+
+								<toParts>? 
+
+								<toPart part="NCName" fromVariable="BPELVariableName" />+ 
+
+								</toParts>
+
+								<fromParts>? 
+
+								<fromPart part="NCName" toVariable="BPELVariableName" />+ 
+							</fromParts>
+						</invoke>
+						
+						<sequence>
+						
+						<!-- Invocando a operação detalhes do carro -->
+						<invoke partnerLink="BuscarCarro" 
+									portType="portType/searchCarRental"?  
+									operation="InformaçãoCarro"
+									inputVariable="IDCarro"?  
+									outputVariable="SituacaoCarro"? 
+									standard-attributes>
+		
+									standard-elements 
+
+								<correlations>? 
+								
+								<correlation set="NCName" initiate="yes|join|no"? 
+											 pattern="request|response|request-response"? />+ 
+
+								</correlations>
+
+							<catch faultName="QName"?  
+								   faultVariable="BPELVariableName"? 
+								   faultMessageType="QName"?  
+								   faultElement="QName"?>*  
+
+								activity 
+
+							</catch>
+
+								<catchAll>? 
+
+									activity 
+
+								</catchAll>
+
+							<compensationHandler>?  
+
+								activity 
+
+							</compensationHandler>
+
+								<toParts>? 
+
+								<toPart part="NCName" fromVariable="BPELVariableName" />+ 
+
+								</toParts>
+
+								<fromParts>? 
+
+								<fromPart part="NCName" toVariable="BPELVariableName" />+ 
+							</fromParts>
+						</invoke>
+						
+						<!-- Invocando a operação reserva do carro -->
+						<invoke partnerLink="ReservarDoCarro" 
+									portType="portType/reservationCar"?  
+									operation="ReservarCarro"
+									inputVariable="IDCarro"?  
+									outputVariable="sucesso?"? 
+									standard-attributes>
+		
+									standard-elements 
+
+								<correlations>? 
+								
+								<correlation set="NCName" initiate="yes|join|no"? 
+											 pattern="request|response|request-response"? />+ 
+
+								</correlations>
+
+							<catch faultName="QName"?  
+								   faultVariable="BPELVariableName"? 
+								   faultMessageType="QName"?  
+								   faultElement="QName"?>*  
+
+								activity 
+
+							</catch>
+
+								<catchAll>? 
+
+									activity 
+
+								</catchAll>
+
+							<compensationHandler>?  
+
+								activity 
+
+							</compensationHandler>
+
+								<toParts>? 
+
+								<toPart part="NCName" fromVariable="BPELVariableName" />+ 
+
+								</toParts>
+
+								<fromParts>? 
+
+								<fromPart part="NCName" toVariable="BPELVariableName" />+ 
+							</fromParts>
+						</invoke>
+						
+						</sequence>
+					
+					</flow>
+					
+					<!-- Invocando a operação informar data de pagamento -->
+						<invoke partnerLink="DataParaPagamento" 
+									portType="portType/setDataPayment"?  
+									operation="EscolherDataPagamento"
+									inputVariable="data"?  
+									outputVariable="valida?"? 
+									standard-attributes>
+		
+									standard-elements 
+
+								<correlations>? 
+								
+								<correlation set="NCName" initiate="yes|join|no"? 
+											 pattern="request|response|request-response"? />+ 
+
+								</correlations>
+
+							<catch faultName="QName"?  
+								   faultVariable="BPELVariableName"? 
+								   faultMessageType="QName"?  
+								   faultElement="QName"?>*  
+
+								activity 
+
+							</catch>
+
+								<catchAll>? 
+
+									activity 
+
+								</catchAll>
+
+							<compensationHandler>?  
+
+								activity 
+
+							</compensationHandler>
+
+								<toParts>? 
+
+								<toPart part="NCName" fromVariable="BPELVariableName" />+ 
+
+								</toParts>
+
+								<fromParts>? 
+
+								<fromPart part="NCName" toVariable="BPELVariableName" />+ 
+							</fromParts>
+						</invoke>
+						
+						<flow>
+							<!-- Invocando a operação pegar numero do voucher -->
+							<invoke partnerLink="Voucher" 
+										portType="portType/getVoucherNumber"?  
+										operation="pegarVoucher"
+										inputVariable="IDPagamento"?  
+										outputVariable="pegou?"? 
+										standard-attributes>
+			
+										standard-elements 
+
+									<correlations>? 
+									
+									<correlation set="NCName" initiate="yes|join|no"? 
+												 pattern="request|response|request-response"? />+ 
+
+									</correlations>
+
+								<catch faultName="QName"?  
+									   faultVariable="BPELVariableName"? 
+									   faultMessageType="QName"?  
+									   faultElement="QName"?>*  
+
+									activity 
+
+								</catch>
+
+									<catchAll>? 
+
+										activity 
+
+									</catchAll>
+
+								<compensationHandler>?  
+
+									activity 
+
+								</compensationHandler>
+
+									<toParts>? 
+
+									<toPart part="NCName" fromVariable="BPELVariableName" />+ 
+
+									</toParts>
+
+									<fromParts>? 
+
+									<fromPart part="NCName" toVariable="BPELVariableName" />+ 
+								</fromParts>
+							</invoke>
+							
+							<!-- Invocando a operação de pagamento -->
+							<invoke partnerLink="Pagamento" 
+									portType="portType/payment"?  
+									operation="Pagamento"
+									inputVariable="valor"?  
+									outputVariable="confirmou?"? 
+									standard-attributes>
+			
+										standard-elements 
+
+									<correlations>? 
+									
+									<correlation set="NCName" initiate="yes|join|no"? 
+												 pattern="request|response|request-response"? />+ 
+
+									</correlations>
+
+								<catch faultName="QName"?  
+									   faultVariable="BPELVariableName"? 
+									   faultMessageType="QName"?  
+									   faultElement="QName"?>*  
+
+									activity 
+
+								</catch>
+
+									<catchAll>? 
+
+										activity 
+
+									</catchAll>
+
+								<compensationHandler>?  
+
+									activity 
+
+								</compensationHandler>
+
+									<toParts>? 
+
+									<toPart part="NCName" fromVariable="BPELVariableName" />+ 
+
+									</toParts>
+
+									<fromParts>? 
+
+									<fromPart part="NCName" toVariable="BPELVariableName" />+ 
+								</fromParts>
+							</invoke>
+						</flow>
+   </sequence>
+</process>

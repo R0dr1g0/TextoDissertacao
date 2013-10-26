@@ -1,0 +1,8 @@
+<variables>
+	<variable name="BPELVariableName"
+		messageType="QName"
+		type="QName"
+		element="QName">
+		from-spec
+	</variable>
+</variables>

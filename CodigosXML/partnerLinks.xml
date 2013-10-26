@@ -1,0 +1,7 @@
+<partnerLinks>
+	<partnerLink name="NCName"
+		partnerLinkType="QName"
+		myRole="NCName"?
+		partnerRole="NCName"?
+		initializePartnerRole="yes|no"? />+
+</partnerLinks>

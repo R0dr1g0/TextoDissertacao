@@ -1,0 +1,202 @@
+%=====================================================================
+\chapter{Fundamentação}
+\label{background}
+%=====================================================================
+O processo de analise e designer de software envolvem vários conceitos fundamentais em torno de sua execução. Por isso, neste capítulo, são apresentados conceitos importantes na fundamentação deste trabalho. Dentre os conceitos aqui descritos abordamos: \textit{Service-oriented computing} (SOC); \textit{Model Driven Architecture} MDA; $\pi$-\textit{Service-Oriented Development Method} ($\pi$-SOD-M); Web \textit{Services-Business Process Execution Language} (WS-BPEL); \textit{Web Service-Policy} (WS-Policy).
+
+%=====================================================================
+\section{Computação Orientada a Serviços - SOC}
+\label{semioticEngineering}
+%=====================================================================
+
+A Computação Orientada a Serviço (SOC), é um paradigma computacional emergente que define um conjunto de conceitos, princípios, \textit{frameworks} e métodos para auxiliar organizações no desenvolvimento de aplicações distribuídas \cite{papazoglou_et_al:2006}. Este paradigma vem mudando a forma como as aplicações distribuídas vem sendo desenvolvidas, projetadas, disponibilizadas e "consumidas". \cite{Papazoglou:2003} considera SOC o paradigma computacional que utiliza serviços como elementos fundamentais para o desenvolvimento de aplicações. 
+
+Serviços fornecem uma interface bem definida e estão associados à implementação de uma determinada funcionalidade de uma aplicação de acordo com as necessidades organizacionais. \cite{PapazoglouHeuvel:2006} considera que o desenvolvimento de serviços está diretamente associado ao processo de negócio. Logo se faz necessário derivar o modelo de processo de negócio para efetivamente construir os serviços da organização considerando, assim, fatores como: reusabilidade, independência de aplicação e plataformas aos quais os mesmos serão executados.
+
+A tecnologia de serviço mais difundida é o serviço Web ou \textit{Web Services}. Serviços web são disponibilizados em um registro de serviços, sendo oferecidos por provedores de serviços e utilizados por consumidores (clientes). \cite{PapazoglouHeuvel:2007} define que provedores e consumidores são fracamente acoplados no contexto da computação orientada a serviço. Serviços web fornecem a interoperabilidade entre aplicações através de troca de mensagens. A comunicação é realizada pela Web por meio de padrões preestabelecidos, o que inclui o SOAP (\textit{Simple Object AccessProtocol}) para transmissão de dados e o WSDL (\textit{Web Services Description Language}) para a definição dos serviços Web. E normalmente e não exclusivamente são transportados por protocolos como HTTP(\textit{Hypertext Transfer Protocol}).
+
+Serviços web são integrados para a construção de aplicações flexíveis, desacopladas e distribuídas dentro do ambiente organizacional e entre as mais diversas plataformas tecnológicas existentes \cite{papazoglouSOC:2007}. Para que a integração automática de serviços web aconteça é necessário o auxilio de elementos responsáveis pela integração dos serviços web, a composição e a coordenação de processos de negócio. 
+
+Os benefícios de uma aplicação orientada a serviços normalmente são alcançados através de mecanismos de integração que tornam possível a interação síncrona e assíncrona entre os serviços. Para facilitar esta integração, mecanismos como orquestração e coreografia são  comumente utilizados para compor processos de negócio utilizando de \textit{Web Services}. Na seção a seguir descrevemos estes dois mecanismos.
+
+%%=====================================================================
+\section{Orquestração X Coreografia}
+%\label{semioticEngineering}
+%%=====================================================================
+
+Para que aplicações orientadas a serviços sejam desenvolvidas, se faz necessário a implementação de mecanismos de composição, capazes de promover a integração entre os serviços que compõem tal aplicação. Estes mecanismos são responsáveis por intermediar a invocação e coordenação de serviços assim como também a execução de processos. Serviços web sem o auxilio de mecanismos de composição são limitados ao ponto de apenas fazer interações simples, já que a maioria dos padrões de interação como SOAP e HTTP, são essencialmente síncronos e sem a manutenção de seus estados (\textit{stateless}).
+
+O real potencial do Paradigma Orientado a Serviços está diretamente ligado ao auxilio de mecanismos de integração que tornem possíveis interações síncronas e assíncronas e com manutenção de estado (\textit{stateful}) entre as partes envolvidas. Desta maneira, estes mecanismos são requisitos fundamentais para atender a processos de negócios complexos presentes nos sistemas atuais \cite{Dustdar:2008}. Existem diversas técnicas para implementação de Composição de Serviços. Entre elas as mais comuns são a orquestração e coreografia.  
+
+Segundo \cite{Papazoglou:2006} orquestração de serviços é uma composição de processos de negócio (através de Web Services) onde existe a figura de um processo central (processo mestre) que controla e coordena os demais processos. Neste tipo de composição, cada processo participante não tem conhecimento de que faz parte de uma composição de processos, com exceção do processo mestre. Somente o processo mestre detém a inteligência sobre o processo completo, e a execução é então centralizada. Outra maneira de definir orquestração é como um processo de negócio executável, que interage através de mensagens com serviços web internos e externos que compõe o processo. 
+
+A Figura 2.1 ilustra um exemplo de um processo de orquestração onde, o controlador central invoca e recebe uma solicitação de um consumidor (passao 1). Em seguida, ele invoca um serviço (passo 2). Ao receber esta resposta, ele invoca outros serviços (passos 3 e 4). Ao concluir o processamento, o controlador central retorna uma resposta para o consumidor (passo 5).    
+
+\figura{Funcionamento básico da orquestração.} %\citeonline[p.~41]{deSouza:2005}.}
+       {fig:Sign:Peirce}
+       {orquestracao.png}
+       {0.400}
+       {0}
+
+A coreografia, diferentemente da orquestração, pode ser definida como um processo colaborativo onde cada parte envolvida descreve sua função na interação entre os serviços que compõe o processo de negócio. Segundo  \cite{Peltz} coreografia é uma composição de processos de negócio (através de Web Services) onde não existe a figura de um processo central (processo mestre) que controla e coordena os demais processos. Neste tipo de composição, cada processo envolvido tem conhecimento de que faz parte de uma composição de processos e que precisa interagir com outros processos, de maneira ordenada, para que a composição resultante tenha sucesso. Cada processo participante sabe exatamente quando atuar, com quais outros processos participantes interagir, quais operações deve executar, quais mensagens deve trocar e até mesmo o momento adequado de troca de mensagens. 
+
+A coreografia tem como característica principal uma maior colaboração entre os Serviços Web que o constituem, o que induz cada um dos participantes a descrever seu papel nas interações através de trocas de mensagens entre si. A lógica do processo de negócio corresponde à união das informações conhecidas por cada participante. A Figura 2.2 a seguir ilustra um processo de negócio coreografia. 
+
+\figura{Funcionamento básico da coreografia.} %\citeonline[p.~41]{deSouza:2005}.}
+       {fig:Sign:Peirce}
+       {Coreografia.png}
+       {0.400}
+       {0}
+       
+O processo inicia com a invocação do serviço 1. Após a conclusão desta tarefa, o serviço 2 é invocado para realizar outra tarefa. Em seguida os serviços 3 e 4 e assim sucessivamente. Cada serviço realiza uma tarefa ou atividade especifica e inicia um ou mais serviços consecutivos que realizam outras tarefas ou atividades, de acordo com a necessidade do processo de negócio. 
+
+A coreografia descreve a colaboração dos serviços no sistema como um todo  independente de um elemento controlador que gerencia as partes envolvidas. Por tanto, linguagens de coreografia não possuem a finalidade de serem executadas, mas sim de descrever regras de interações entre diversos participantes em um processo de negócio. A comunicação é modelada através de conexões permanentes e com manutenção de estado, visando os detalhes de interação entre os participantes do processo executado colaborativamente, descrevendo e restringindo as mensagens que cada participante pode enviar e quais respostas são esperadas. Normalmente as linguagens que descrevem coreografia definem os aspectos dinâmicos da interação entre serviços que envolvem o processo de negócio \cite{Papazoglou:2006}.
+
+%=====================================================================
+\subsection{Padrão de interação automática}
+%\label{definitions}
+%=====================================================================
+
+O processo de desenvolvimento de aplicações composta por serviços, baseia-se somente na descrição e na integração automática de serviços. Uma vez de posse da descrição dos serviços, a aplicação busca os provedores de serviços necessários, e integra os serviços compondo a aplicação, isto acontece antes ou durante a execução. O foco do desenvolvimento orientado a serviços concentra-se na maneira como as aplicações são descritas e organizadas. Como resultado, as aplicações tornam-se dinamicamente mutáveis, ou seja, são capazes de descobrir serviços em tempo de execução de acordo com a suas necessidades.
+
+Para fornecer detecção dinâmica para aplicações baseadas em serviços, a orientação a serviços oferece uma padronização entre as entidades que atuam na formalização da descrição de serviços. A seguir, a Figura 2.3 ilustra o padrão de interação da Computação Orientada a Serviços.
+
+
+\figura{Diagrama de interação SOC.} %\citeonline[p.~41]{deSouza:2005}.}
+       {fig:Sign:Peirce}
+       {DiagramaSOC.png}
+       {0.400}
+       {0}
+
+As seguintes entidades atuam no processo padrão de integração automática de serviços: 
+
+\begin{enumerate}
+
+\item[•] \textit{Service providers} (provedores de serviço): representa a plataforma que hospeda e disponibiliza o serviço web, permitindo que os clientes acessem o serviço. Organizações disponibilizam seus serviços implementados em uma descrição de serviços, para que os mesmos sejam visualizados e acessados por outras organizações e mais tarde integrados a suas aplicações. (1) Um prestador de serviço publica a descrição de seu serviço em um registro de serviço, para que aplicações possam encontrar um dado serviço a partir de sua descrição. 
+
+\item[•] \textit{Service requesters} (consumidores de serviços): é a aplicação cliente, que está procurando, invocando ou iniciando uma interação entre os serviços web para a composição da aplicação. O cliente do serviço pode ser uma pessoa acessando a aplicação através de um \textit{browser} ou uma aplicação realizando uma invocação aos métodos descritos na interface de algum serviço web que compõe a aplicação de fato. (2) Os consumidores utilizam o registro de serviços para obter os serviços necessários para realizar suas tarefas. 
+
+\item[•] Um ou vários \textit{service registry} (registradores de serviços): Os clientes, ou seja, os (service requesters) buscam por serviços necessários de acordo com suas necessidades nos registradores de serviços e recuperam informações referentes a interface de comunicação para que a aplicação ligue-se aos serviços web necessários, durante a fase de desenvolvimento ou durante a execução da aplicação cliente. (3) Se os provedores de serviço adequados encontram-se no registro de serviços no momento da solicitação, o registrador de serviço retorna uma referência do serviço solicitado, para que, desta forma, a aplicação possa ligar-se a um destes provedores \cite{ZHANG}. (4) Uma vez que esta ligação seja concretizada, o provedor de serviço retorna uma instancia deste serviço. E finalmente (5) uma instância dos serviços podem ser utilizados pela aplicação cliente.
+
+\end{enumerate}
+
+%=====================================================================
+\subsection{Serviços Web}
+\label{definitions}
+%=====================================================================
+
+SOC utiliza serviços web como elemento essencial para a construção de aplicações distribuídas. Neste contexto serviços são aplicações autônomas interoperáveis que podem ser descritas, publicadas, descobertas, orquestradas e implementadas utilizando protocolos padronizados, promovendo a colaboração entre aplicações distribuídas de diversas organizações \cite{Dustdar:2008}. Além disso, são projetados de forma independe e contratualmente definidos em uma descrição de serviços, que contém uma combinação sintática, semântica e informações comportamentais, que expressam suas capacidades através de sua descrição.
+
+\textit{Web services} é um padrão aberto mantido pela \textit{World Wide Web Consortium} (W3C), para padronizar a interação entre aplicações distribuídas. Utilizar este padrão, para implementar serviços, torna-se cada vez mais comum. O uso deste padrão por todos os fornecedores de serviços é um meio para promover a integração entre sistemas díspares.
+
+\textit{Web services} podem ser disponibilizados através da Internet, usando padrões e protocolos baseados em linguagem XML(\textit{eXtensible Markup Language}). Desta maneira podemos defini-los como: um sistema de software projetado para dar suporte interações máquina-a-máquina interoperáveis sobre uma rede. \textit{Web services} são descritos através de uma descrição de serviços em um formato processável por linguagem de máquina (mais especificamente WSDL) \cite{W3Cwebservice}. Outros sistemas interagem com \textit{web services} através de sua descrição de serviço por meio de troca de mensagens utilizando protocolos web como SOAP, normalmente e não exclusivamente transmitidas através de HTTP, com serialização XML em conjunto com outros padrões Web de comunicação. Por englobar todos estes padrões em seu desenvolvimento, \textit{web Service} pode ser considerado como elemento chave dá Computação Orientada a Serviço.
+
+Por padrão, a arquitetura desta tecnologia é descrita em camadas, para facilitar o entendimento e compreensão das operações de interação entre \textit{web services}, estas camadas são denominadas Pilha de protocolos \cite{kreger2001services}. Para que seja possível as operações de publicar, descobrir e invocar remotamente por parte de clientes e contratantes os \textit{web services} devem ser disponibilizados através da rede. A Figura 2.4 ilustra a pilha de protocolos utilizada na interação entre \textit{web services}.
+
+\figura{Pilha de protocolos para interação entre web services.} %\citeonline[p.~41]{deSouza:2005}.}
+       {fig:Sign:Peirce}
+       {Pilhadeprotocolos.png}
+       {0.400}
+       {0}
+
+Na base da pilha de protocolos, encontra-se a camada mais próximo a rede, esta camada é responsável por fazer a comunicação entre serviços através da internet. Para que esta comunicação seja possível, é necessário o uso de protocolos específicos para a comunicação entre maquinas através da rede. Protocolos como HTTP (\textit{Hypertext Transfer Protocol}) que são amplamente difundido através da rede mundial de computadores. Este é o principal protocolo a nível de rede utilizado na implementação de web services. Entretanto, outros protocolos como FTP, REST e SMTP, podem ser utilizados para realizar a comunicação entre \textit{web services} partindo da camada mais baixa.
+
+A segunda camada é responsável por fornecer meios para trocas de mensagens baseadas em linguagem XML entre \textit{web services}. Nesta camada o protocolo SOAP (\textit{Simple Object Access Protocol}) é amplamente utilizado para a comunicação entre web services, devido principalmente por seu mecanismo padronizado de envelope de mensagens centradas e documentos ou chamadas remotas de procedimento (RPC) \cite{W3Cwebservice}. Além disso, SOAP oferece um mecanismo padronizado de codificação de tipos, ou seja, um conjunto de regras de codificação para expressar e converter instâncias de tipos de dados definidos em aplicações em plataformas e linguagens de programação díspares.
+
+A terceira camada é responsável pela descrição dos \textit{web services}, aqui o padrão utilizado para descrever a combinação sintática, semântica e informações comportamentais das capacidades funcionais dos serviços web é o padrão WSDL. Este padrão por sua vez, define a interface de comunicação de \textit{web services}, assim como também, a dinâmica de interação com o mesmo. Por meio da descrição de serviços é possível que provedores publiquem as especificações contratuais necessárias para que clientes possam invocar tal \textit{web service}. A descrição do serviço é a chave para tornar aplicações compostas por \textit{web services} fracamente acoplada bem como reduzir a quantidade necessária de conhecimento compartilhado entre o cliente e provedor de serviços.
+
+As três camadas descritas anteriormente, formam a base minima para que seja possível que aplicações baseadas em serviços possam interopera entre os serviços web que a compõe. Enquanto estas camadas apresentam tecnologias de interoperabilidade entre serviços web, as duas próximas camadas, apresentam a forma como \textit{web services} são publicados e descobertos, é possível implementar estas operações de interação através de uma variedade de soluções.
+
+A quarta camada da pilha de protocolos é subdividida em duas, a camada de publicação de serviços e a camada de descoberta de serviços. Estas camadas são responsáveis por publicar e descobrir \textit{web services}). A publicação de um \textit{web sevice} consiste em disponibilizar o documento WSDL para que os mesmos possam ser descobertos através da rede. A publicação de um \textit{web service} pode ser feita de duas formas: direta e indiretamente. A publicação direta, consiste simplesmente em enviar o documento WSDL a um cliente interessado em contratar um serviço. 
+
+Já a publicação indireta é feita quando provedores de serviços publicam documentos WSDL em repositórios para serem descobertos e acessados posteriormente por terceiros. A principal tecnologia utilizada para o desenvolvimento destes repositórios é o UDDI (\textit{Universal Description, Discovery, Integration}) que utiliza uma base de registro compartilhada por diferentes clientes, permitindo descrever, registrar e localizar serviços \cite{W3Cwebservice}. É importante frisar que a camada de descoberta esta fortemente ligada a camada de publicação, haja visto que serviços não podem ser descobertos pela rede, se não foram publicados anteriormente.
+
+A camada superior da pilha de protocolos é responsável por descrever de fato como os serviços são compostos. Serviços implementam funcionalidades especificas e independente, logo a composição de vários serviços podem ser implementada gerando um serviço mais complexo ou para a construção de sistemas baseados em serviços. Linguagens como WS-BPEL, PEWS, WSFL, etc, podem ser usada nesta camada visto que ela permite a composição de serviços a partir da descrição de processos de negócios.
+
+
+%%=====================================================================
+\subsection{Linguagens de Orquestração}
+%\label{designSpace}
+%%=====================================================================
+
+Para descrever orquestração de serviços em processos de negócio, é preciso fazer uso de linguagens especializadas para este fim. Tais linguagens, devem ser capazes de disponibilizar construções: condicional, controle de exceção, sequencia, laços de repetição, paralelismo e variáveis, assim como construções capazes de manipular e tratar eventos, controles de tempo e recuperação de exceções \cite{BPEL20}. 
+
+Como exemplo das características descritas anteriormente, podemos citar algumas linguagens de orquestração: WSFL (\textit{Web Services Flow Language}) \cite{Tsalgatidou}, WS-BPEL (\textit{Web Service - Business Process Execution Language WS-BPEL}) \cite{BPEL20}, PEWS (\textit{Predicatepath Expression for Web Services}) \cite{ba2005building}. A seguir definiremos de maneira sucinta cada uma destas linguagens.A linguagem de orquestração WS-BPEL terá uma seção própria por ser a linguagem em foco neste trabalho.
+
+\begin{enumerate}
+
+\item[•] \textit{Web Service Flow Language}: WSFL é uma linguagem produzida pela IBM em meados de 2001, com sintaxe baseada em XML para descrever composição de serviços em processo de negócios públicos, privados ou sequencias. Com WSFL, também é possível descrever operações específicas, execução de processos e das trocas de dados entre os serviços web que compõe o processo de negócio. WSFL implementa interfaces WSDL, permitindo composição recursiva e tratamento de exceção \cite{leymann01wsfl}.
+
+\item[•] \textit{Predicatepath Expression for Web Services}: PEWS é uma linguagem de orquestração de serviços que destaca-se por promover suporte a descrição de comportamento em aplicações baseadas em serviços \cite{Cheikh}. Tal comportamento, define a ordem em que os serviços de uma composição são executados, a definição de comportamento ocorre através da adição de \textit{predicate path expressions} as descrições dos serviços envolvidos em uma composição. Como diferencial em comparação a outras linguagens de orquestração, PEWS dá suporte à representação de comportamento temporal e verificação dos dados em tempo de execução. 
+
+\item[•] \textit{Web Services - Business Process Execution Language}: WS-BPEL é uma linguagem de programação com sintaxe baseada em XML, usada para composição, orquestração e coordenação de \textit{Web Services}, capaz de descrever comportamento de processos de negócios \cite{BPEL20}. WS-BPEL pode ser utilizada para descrever aplicações baseadas em serviços, assim como também descrever aplicações que são serviços. Esta linguagem foi inspirada em linguagens anteriores como \textit{Web Services Flow Language} (WSFL) da IBM e XLANG da Microsoft \cite{BPEL20}.
+
+\end{enumerate}
+
+%%=====================================================================
+\subsection{Model Dirven Architecture}
+%\label{designSpace}
+%%=====================================================================
+
+
+Desenvolver sistemas que atendam aos requisitos das organizações, não é uma tarefa simples. Atualmente, organizações buscam mecanismos de desenvolvimentos, capazes de facilitar esta tarefa. A literatura aponta, que metodologias, técnicas de desenvolvimento, análise e designer são o  ponto de partida para desenvolver sistemas que atendam aos requisitos organizacionais com rapidez, baixo custo e qualidade. Alguns autores, salientam que metodologias orientadas por modelos, técnicas para documentação, são a chave para tornar real a ideia de rapidez, maior produtividade, portabilidade, interoperabilidade, menor custo, facilidade na evolução do software e maior qualidade no desenvolvimento de softwares \cite{Placido}.
+
+Neste contexto, o processo de desenvolvimento de software dirigido a modelos (\textit{Model Driving Development}), padronizado pela \textit{Model Driven Architecture} (MDA) é uma nova abordagem para o desenvolvimento de software, definida pelo \textit{Object Management Group} (OMG), que vem recebendo atenção da comunidade acadêmica e industrial. MDA visa separar a lógica do negócio da lógica da aplicação, mantendo-as em diferentes níveis de abstração \cite{miller2003}. Esta metodologia coloca a criação de modelos como elemento central do processo de desenvolvimento de software.
+
+MDA prega a construção de modelos desde o início do processo de desenvolvimento de software, ou seja, a partir da captação dos requisitos do sistema (domínio do problema), gerando modelos com maior nível de abstração. Tais modelos podem ser incrementados com características especificas de uma plataforma, tornando-se modelos mais concretos (domínio solução), para que mais tarde estes modelos sejam transformados em código. Desta maneira o ciclo de vida MDA é baseado em transformações automáticas de modelos de mais alto nível pro meio de regras de mapeamento, em modelos mais concretos, ate que por fim estes modelos seja transformados automaticamente em código do sistema. A Figura 2.6 ilustra o cilo de vida do MDA.
+
+
+
+\figura{Ciclo de vida do MDA.} %\citeonline[p.~41]{deSouza:2005}.}
+       {fig:Sign:Peirce}
+       {MDA.png}
+       {0.400}
+       {0}
+
+
+Em um processo MDA automatizado, os modelos mais concretos do sistema, devem representar com precisão o código, ou seja, ele deve ser executável e ter uma equivalência funcional com todos os outros modelos mais abstratos \cite{miller2003}. Desta maneira, modificações no modelo de mais alto nível de abstração são refletidas automaticamente nos modelos de mais baixo nível, tornando a atividade de modelar no nível mais abstrato, o centro de todo processo de desenvolvimento do software, dispensando completamente atividades manuais nos modelos de mais baixos níveis de abstração. É possível observar que MDA faz uma separação clara dos requisitos do sistema, através da representação de modelos com abstração mais elevada, das características especificas de implementação do sistema, que formalizam os modelos mais concretos \cite{miller2003}.
+
+%%=====================================================================
+\subsection{Modelos}
+%\label{designSpace}
+%%=====================================================================
+
+
+O processo de modelagem de um sistema, parte de um conjunto de requisitos de domínio específico para a obtenção de uma abstração apropriada deste sistema, não é uma tarefa simples. O desenvolvimento de sistemas, independente de sua complexidade, levam ao uso de modelos. Modelos são a representação (especificação) funcional, estrutural e comportamental de sistemas de software \cite{miller2003}. Modelos facilitam a comunicação entre os \textit{stakeholders} do sistema, são mais baratos de construir do que protótipos do sistema em se, servem como documentação e aumentam a produtividade no domínio da aplicação do sistema. Tornando -se uma ferramenta poderosa em mãos da equipe de desenvolvimento, para diminuir a distancia entre os requisitos e as funcionalidades implementadas.
+
+MDA é uma abordagem que faz uso de modelos em vários níveis de abstração, juntos estes modelos formalizam um sistema modelado de fato. Alguns destes modelos serão construídos independente de plataformas especificas, enquanto outros serão modelados de acordo com a plataforma de software escolhida \cite{miller2003}. Os níveis de abstração de modelos MDA são: Computação Independente de Modelo (CIM); Modelo Independente de Plataforma (PIM) e Modelo de Plataforma Especifica (PSM). A seguir os três níveis de abstração citados anteriormente serão descritos.
+
+%%=====================================================================
+\subsection{\textit{Computation Independent Model} (CIM)}
+%\label{designSpace}
+%%=====================================================================
+
+O modelo CIM mostra o sistema do ponto de vista independente de computação. Este modelo, não se preocupa com detalhes específicos da estrutura dos sistemas, sendo considerado o modelo de domínio de negócio. 
+
+Este modelo, é construído com um vocabulário simples para que usuários do sistema possam entender facilmente as ideias especificadas no mesmo, pois usuários dos sistemas geralmente não têm conhecimento sobre modelos ou artefatos usados para modelar requisitos de sistemas \cite{miller2003}. 
+
+A construção do modelo CIM é importante, pois este modelo é a ponte entre especialistas no domínio do problema e seus requisitos, e a equipe de desenvolvimento que são especialistas em projetar (arquitetura) e construir artefatos que juntos vão satisfazer aos requisitos do domínio, elicitados junto aos usuários \cite{miller2003}. O CIM é obtido no processo de documentação e especificação dos requisitos.
+
+%%=====================================================================
+\subsection{\textit{Platform Independent Mode} - PIM}
+%\label{designSpace}
+%%=====================================================================
+
+O modelo PIM representa as operações do sistema, ou seja, o modelo computacional do sistema que sera produzido, mas escondendo os detalhes necessários para implantar esse modelo numa plataforma específica. Este modelo é único e não há variação deste de uma plataforma para outra. 
+
+O modelo PIM pode ser especificado usando uma linguagem de modelagem de proposito geral como \textit{Unifield Modeling Language} (UML) ou especifico como o método PI-SOD-M, de maneira que este modelo pode ser considerado o modelo conceitual do sistema \cite{miller2003}.
+
+Este modelo é uma matéria de sujeito como um sistema bancário ou controle de estoque. Um modelo PIM representa um ou mais modelos de plataforma, não preocupando-se com detalhes específicos da mesma, como por exemplo, um PIM de um sistema de controle de estoque, não precisa ser capturados aspectos da persistência dos dados do sistema, ou tratamento de exceção do mesmo \cite{miller2003}.
+
+
+%%=====================================================================
+\subsection{\textit{Platform Specific Mode} - PSM}
+%\label{designSpace}
+%%=====================================================================
+
+O modelo PSM mostra a visão do sistema que agrega características e elementos da plataforma específica, contendo informações da tecnologia utilizada na aplicação, como por exemplo a linguagem de programação, os componentes de \textit{middleware}, a arquitetura de hardware e de software. Para que isso seja possível é necessário o suporte de ferramentas que façam o mapeamento adequado de uma especificação abstrata (PIM) para uma determinada plataforma \cite{miller2003}. 
+
+O PSM, por sua vez, passa por processo(s) de refinamento(s) para obtenção de um alto nível de detalhes que especificam a plataforma de destino. Uma vez capturado todo este detalhamento da plataforma de destino, é possível efetuar um processo de transformação do mesmo em código (implementação) da aplicação \cite{miller2003}. O modelo PSM é o responsável por lidar com toda heterogeneidade e complexidade dos diversos tipos de plataformas existentes.
+
+
+

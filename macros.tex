@@ -1,0 +1,145 @@
+%=====================================================================
+% Macros usadas no documento
+%---------------------------------------------------------------------
+% Para expressões em inglês:
+% \en{hardware}, \en{software}
+%---------------------------------------------------------------------
+\newcommand{\en}[1]{
+  \selectlanguage{english}
+  \textit{#1}
+  \selectlanguage{brazil}
+}
+%---------------------------------------------------------------------
+% Definindo o comando figura
+% 1 - Legenda da figura
+% 2 - Rótulo para referência da figura
+% 3 - Nome de arquivo que contém a figura
+% 4 - Escala da figura
+% 5 - Ângulo de rotação da figura
+%---------------------------------------------------------------------
+\newcommand{\figura}[5]{
+  \begin{figure}[!htb]
+    \begin{center}
+      \includegraphics[scale=#4,angle=#5]{images/#3}
+      \caption{#1}
+      \label{#2}
+    \end{center}
+  \end{figure}
+}
+%---------------------------------------------------------------------
+% Versão estendida para expandir em documentos com duas colunas
+%---------------------------------------------------------------------
+\newcommand{\figuraL}[5]{
+  \begin{figure*}[!htb]
+    \begin{center}
+      \includegraphics[scale=#4,angle=#5]{images/#3}
+      \caption{#1}
+      \label{#2}
+    \end{center}
+  \end{figure*}
+}
+%---------------------------------------------------------------------
+% Símbolos para 
+%---------------------------------------------------------------------
+\newcommand{\X}{~~$\bullet$}
+\newcommand{\cf}{\ding{52}}
+\newcommand{\vi}{\ding{56}}
+\newcommand{\na}{{\bf --}}
+%---------------------------------------------------------------------
+% Siglas e significados
+%---------------------------------------------------------------------
+% OMG Stardarts
+%---------------------------------------------------------------------
+\newcommand{\omg}{OMG}
+\newcommand{\Omg}{Object Management Group}
+\newcommand{\mda}{MDA}
+\newcommand{\Mda}{Model Driven Architecture}
+\newcommand{\mof}{MOF}
+\newcommand{\Mof}{Meta Object Facility}
+\newcommand{\uml}{UML}
+\newcommand{\Uml}{Unified Modeling Language}
+\newcommand{\ocl}{OCL}
+\newcommand{\Ocl}{Object Constraint Language}
+\newcommand{\xmi}{XMI}
+\newcommand{\Xmi}{\xmi\ Metadata Interchange}
+\newcommand{\xml}{XML}
+\newcommand{\Xml}{Extensible Markup Language}
+\newcommand{\qvt}{QVT}
+\newcommand{\Qvt}{Query/View/Transformation}
+%---------------------------------------------------------------------
+% MDA models
+%---------------------------------------------------------------------
+\newcommand{\cim}{CIM}
+\newcommand{\Cim}{Computation Independent Model}
+\newcommand{\pim}{PIM}
+\newcommand{\Pim}{Platform Independent Model}
+\newcommand{\psm}{PSM}
+\newcommand{\Psm}{Platform Specific Model}
+%---------------------------------------------------------------------
+% Eclipse Modeling
+%---------------------------------------------------------------------
+\newcommand{\emf}{EMF}
+\newcommand{\Emf}{Eclipse Modeling Framework}
+\newcommand{\gef}{GEF}
+\newcommand{\Gef}{Graphical Editing Framework}
+\newcommand{\gmf}{GMF}
+\newcommand{\Gmf}{Graphical Modeling Framework}
+\newcommand{\pojo}{POJO}
+\newcommand{\Pojo}{Plain Old Java Object}
+%---------------------------------------------------------------------
+% Model-based
+%---------------------------------------------------------------------
+\newcommand{\diubm}{DIUBM} 
+\newcommand{\Diubm}{Desenvolvimento de Interface de Usuário Baseado em
+  Modelos}
+\newcommand{\mbuid}{MBUID}
+\newcommand{\Mbuid}{Model-Based User Interface Development}
+\newcommand{\mdd}{MDD}
+\newcommand{\Mdd}{Model Driven Development}
+%---------------------------------------------------------------------
+% Gerais de IHC
+%---------------------------------------------------------------------
+\newcommand{\aladim}{ALaDIM}
+\newcommand{\Aladim}{Abstract Language  for Description of Interactive
+  Message}
+\newcommand{\molic}{MoLIC}
+\newcommand{\Molic}{Modeling Language for Interaction as Conversation}
+\newcommand{\imml}{IMML}
+\newcommand{\Imml}{Interactive Message Modeling Language}
+\newcommand{\ihc}{IHC}
+\newcommand{\Ihc}{Interação Humano-Computador}
+\newcommand{\chimy}{CHI}
+\newcommand{\Chimy}{Computer-Human Interaction}
+\newcommand{\ec}{Engenharia Cognitiva}
+\newcommand{\ta}{Teoria da Ação}
+%---------------------------------------------------------------------
+% Software Engineering
+%---------------------------------------------------------------------
+\newcommand{\rup}{RUP}
+\newcommand{\Rup}{Rational Unified Process}
+\newcommand{\es}{ES}
+\newcommand{\Es}{Engenharia de Software}
+\newcommand{\ese}{ESE}
+\newcommand{\Ese}{Engenharia de Software Experimental}
+\newcommand{\gui}{GUI}
+\newcommand{\Gui}{Graphical User Interface}
+%---------------------------------------------------------------------
+% Semiotic Engineering
+%---------------------------------------------------------------------
+\newcommand{\se}{Engenharia Semiótica}
+\newcommand{\mac}{MAC}
+\newcommand{\Mac}{Método de Avaliação da Comunicabilidade}
+\newcommand{\mis}{MIS}
+\newcommand{\Mis}{Método de Inspeção Semiótica}
+%---------------------------------------------------------------------
+% Gerais
+%---------------------------------------------------------------------
+\newcommand{\cdn}{CDN}
+\newcommand{\Cdn}{Cognitive Dimensions of Notations}
+\newcommand{\gqm}{GQM}
+\newcommand{\Gqm}{Goal/Question/Metric}
+
+
+\newcommand{\linkert}{\\(~~) Pouquíssimo (~~) Pouco (~~) Neutro (~~) Muito
+  (~~) Demasiado}
+%=====================================================================

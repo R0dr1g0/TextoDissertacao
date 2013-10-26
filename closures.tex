@@ -1,0 +1,155 @@
+%=====================================================================
+\chapter{Avaliação (Provas de Conceito)}
+\label{Evaluations}
+%=====================================================================
+Em construção!!!
+
+%%=====================================================================
+\section{Estudo de Caso}%5.1
+%\label{cdn}
+%%=====================================================================
+%
+
+Em construção!!!
+
+
+%%=====================================================================
+\subsection{To Publish Music}%5.1.1
+%\label{cdn}
+%%=====================================================================
+%
+
+Refazendo!!!
+
+%Considere o seguinte cenário, uma organização quer prover um serviço para publicação de musica denominado “To Publish Music”. Este serviço monitora durante determinados períodos de tempo a lista de musica de um usuário e publica em ambas as redes sociais do Twitter e Facebook, o titulo da musica que o usuário esta ouvindo no momento pelo Spotify. 
+%
+%O usuário pode baixar a música que ele está escutando através de um processo de download após a confirmação do pagamento da música ter sido feito ao spotify via PayPal ou cartão de crédito. As funcionalidades de buscar música, escolher música, baixar música, ouvir música, comprar música e publicar música estão disponíveis via “To Publish Music” uma vez que a aplicação esteja implementada de fato. Este estudo de caso tem como desafio garantir a conformidade entre a especificação e o resultado da implementação.
+
+%%=====================================================================
+%\subsubsection{$\pi$-ServiceComposition Model}
+%%\label{cndDimentions}
+%%=====================================================================
+%
+%Em construção!!!
+%
+%%O To Publish Music utiliza quatro colaboradores de negócios (Business Colaborator) externos para a construção desta composição de serviços, são eles: Bank, Spotify, Twitter e Facebook;
+%%A Figura 4.3 ilustra os serviços do To Publish Music que consistem em um conjunto de funções: busca de música, seleccione a música, comprar música, download de músicas, ouvir música e publicar música. A ação música publish chama dois colaboradores de serviços (Facebook e Twitter), e a ação buy música chama duas funções do colaborador serviço do Banco.
+%%
+%%\figura{To Publish Music $\pi$-ServiceComposition Model. \cite{Placido}}
+%%       {fig:Sign:Peirce}
+%%       {BC.png}
+%%       {0.500}
+%%       {0}
+%       
+%%%=====================================================================
+%%\subsubsection{BPEL Executable Model}
+%%%\label{cndDimentions}
+%%%=====================================================================
+%
+%Em construção!!!
+%
+%
+%%Os quatro colaboradores de negócios $\pi$-ServiceComposition Model, serão transformados em quatro parceiros de negócios no BPEL Executable Model: Bank, Spotify, Twitter e Facebook;
+%%
+%%\figura{Modelo To Publish Music modelado no plugin BPELExecutable.}
+%%       {fig:Sign:Peirce}
+%%       {BPELModel.png}
+%%       {0.500}
+%%       {0}
+%
+%%%%% Local Variables: 
+%%%%% mode: latex
+%%%%% TeX-master: "main"
+%%%%% End: 
+%
+
+
+
+%%=====================================================================
+\subsection{Crime Map}%5.1.2
+%\label{cdn}
+%%=====================================================================
+%
+
+Em construção!!!
+
+%%=====================================================================
+\subsection{GesIMED}%5.1.1
+%\label{cdn}
+%%=====================================================================
+%
+
+Em construção!!!
+
+%%=====================================================================
+\section{Resultados}%5.1.1
+%\label{cdn}
+%%=====================================================================
+%
+
+
+Atualmente empresas disponibilizam seu serviços pela internet para facilitar a troca de informações entre empresas e seus clientes . Partindo desta afirmação aplicações são construídas através da composição de serviços distintos de acordo com as necessidades (requisitos) da empresa. Para que estas aplicações garantam algum tipo de qualidade, as   necessidades ou requisitos especificados pela empresa devem ser perfeitamente implementados para que haja uma satisfação subjetiva da empresa que requiriu o sistema. Atingir certo ponto de coerência entre requisitos e implementação não é uma atividade trivial para desenvolvedores. Além disso, os desenvolvedores contam com um grande número de linguagens que orquestram serviços para construir tais aplicações, como por exemplo WS-BPEL 2.0.
+
+Este trabalho tem como objetivo principal complementar a metodologia $\pi$-SOD-M, para que
+o mesmo forneça um meio de especificar aplicações baseadas em serviços na linguagem de orquestração de serviços WS-BPEL 2.0. O trabalho libera os desenvolvedores de detalhes específicos da plataforma WS-BPEL promovendo a especificação de aplicações através da modelagem, permitindo que requisitos funcionais sejam modelados através de composição de serviços. Estes requisitos são parte de uma especificação de processos de negócios, ao longo das fases da metodologia, as regras de negócio e assim como as restrições são modeladas utilizando conceitos mais concretos que conduzam a sua implementação em código executável.
+
+Os benefícios de se trabalhar a partir destes resultados propõe um meio de fornecer uma metodologia orientada software que podem ser incluídas em diferentes fases de desenvolvimento, como na especificação das propriedades funcionais, na sua modelagem e implementação. Desta maneira, este trabalho complementa $\pi$-SOD-M proporcionando um ambiente de modelagem de aplicações composta por serviços para a plataforma WS-BPEL 2.0, este mesmo ambiente é capaz de
+transformar modelos criados através da modelagem em BPEL e transforma-los em código de
+aplicações executáveis.
+
+
+
+
+%=====================================================================
+\section{Principais contribuições}
+\label{contributions}
+%=====================================================================
+
+As principais contribuições desse trabalho são as:
+
+\begin{itemize}
+
+\item[•] A integração das atividades de modelagem de composição de serviços em WS-BPEL 2.0, arquitetura orientada a serviço através de transformações baseadas em modelos
+
+\item[•] A geração de um meta-modelos WS-BPEL 2.0.
+
+\item[•] Especificação de regras de transformação entre $\pi$-ServiceCompositionModel e
+WS-BPEL 2.0, procurando expressar, em todas as atividades, as informações contidas na atividade predecessora.
+
+\item[•] Implementação das regras de transformação em ATL permitindo que ocorra um processo automatizado de transformações entre os modelos da atividade supracitada. O processo automatizado permite que sejam mantidas as informações
+
+\item[•] O complemento de um ambiente integrado, $\pi$-SOD-M, que permite a criação de modelos com base em metamodelos bem definidos e regras de transformação entre seus elementos agora para a plataforma WS-BPEL2.0. Tal ambiente facilita o acesso às informações aos modelos gerados pela metodologia e originados durante o processo de desenvolvimento, permitindo que requisitos possam ser adicionados e propagados facilmente para a construção de aplicações em WS-BPEL 2.0. Além disso, oferece
+suporte a rastreabilidade entre os modelos.
+
+\item[•] A validação das regras de transformação usando o estudos de caso, o To Publish Music, usado para avaliar se os requisitos estão de acordo com as estratégias de composições geradas orientadas a serviços.
+
+\end{itemize}
+
+
+%=====================================================================
+\section{Trabalhos futuros}
+\label{perspectives}
+%=====================================================================
+
+À pesquisa desenvolvida nessa dissertação, tem alguns trabalhos futuros que podem ser relacionados, tais com:
+
+\begin{itemize}
+
+\item[•] A extensão do meta-modelo  WS-BPEL 2.0 para que o mesmo dê suporte a politicas de serviços web;
+
+\item[•] Implementar alterações em uma das \textit{engines} de código livre existente para suportar a execução de composições com politicas de serviço.
+
+
+\item[•] Utilização de métricas para avaliar os resultados das transformações criadas, e a conformidade entre os modelos gerados. As possíveis métricas a serem utilizadas como base, são as fornecidas pelo documento \textit{Model Driving Development} da  \textit{Engineering metrics Baseline}.
+
+
+\item[•] Especificação e construção de um ambiente de configuração e reconfiguração dinâmica que providencie suporte a transformações orientadas a serviços entre as fases do ciclo de desenvolvimento de software.
+
+\end{itemize}
+
+
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "main"
+%%% End: 

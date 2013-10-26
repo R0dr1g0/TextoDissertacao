@@ -1,0 +1,11 @@
+<assign validate="yes|no"? standard-attributes>
+	standard-elements
+	(	
+	<copy keepSrcElementName="yes|no"? ignoreMissingFromData="yes|no"?>
+		from-spec to-spec
+	</copy> |
+	<extensionAssignOperation>
+		assign-element-of-other-namespace
+	</extensionAssignOperation>
+	)+
+</assign>

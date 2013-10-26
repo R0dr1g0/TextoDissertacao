@@ -1,0 +1,23 @@
+<invoke partnerLink="NCName"
+	portType="QName"?
+	operation="NCName"
+	inputVariable="BPELVariableName"?
+	outputVariable="BPELVariableName"?
+	standard-attributes> standard-elements
+	<correlations>?
+		<correlation set="NCName" initiate="yes|join|no"?
+		pattern="request|response|request-response"? />+
+	</correlations>
+	<catch faultName="QName"?
+		faultVariable="BPELVariableName"?
+		faultMessageType="QName"?
+		faultElement="QName"?>*
+		activity
+	</catch>
+	<catchAll>?
+		activity
+	</catchAll>
+	<compensationHandler>?
+		activity
+	</compensationHandler>
+</invoke>
